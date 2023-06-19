@@ -3,6 +3,9 @@ module.exports = {
   content: ['./pages/**/*.{js,ts,jsx,tsx,mdx}', './components/**/*.{js,ts,jsx,tsx,mdx}', './app/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)'],
+      },
       colors: {
         gray: {
           200: 'hsl(0, 0%, 87%)',
@@ -41,6 +44,10 @@ module.exports = {
         sky: {
           50: 'hsl(203, 92%, 95%)',
         },
+      },
+      borderRadius: {
+        '2.5xl': '1.25rem',
+        '5xl': '2.5rem',
       },
     },
   },
