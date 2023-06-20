@@ -1,50 +1,90 @@
 import Image from 'next/image';
-
+// TODO: continue styling the custom radio (remove the border if checked)
 export default function Home() {
   return (
     <main>
-      <section>
-        <div>
-          <Image src="/images/logo.svg" alt="" width={60} height={60} aria-hidden="true" />
-          <h1>Body Mass Index Calculator</h1>
-          <p>
+      <section className="rounded-b-5xl bg-slate-200 px-6">
+        <div className="flex flex-col items-center gap-6 pt-8">
+          <Image src="/images/logo.svg" alt="" width={60} height={60} className="h-10 w-10" aria-hidden="true" />
+          <h1 className="text-center text-5xl font-semibold leading-tight text-blue-800">Body Mass Index Calculator</h1>
+          <p className="text-center text-gray-500">
             Better understand your weight in relation to your height using our body mass index (BM) calculator. While BMI is not the sole determinant of a
             healthy weight, it offers a valuable starting point to evaluate your overall health and well-being.
           </p>
         </div>
-        <div>
-          <h2>Enter your details below</h2>
-          <div>
-            <div>
-              <input type="radio" name="measurement" id="metric" />
-              <span></span>
-              <label htmlFor="metric">Metric</label>
-            </div>
-            <div>
-              <input type="radio" name="measurement" id="imperial" />
-              <span></span>
-              <label htmlFor="imperial">Imperial</label>
-            </div>
 
-            <div>
-              <label htmlFor="height">Height</label>
-              <div>
-                <input type="text" id="height" />
-                <span></span>
+        <div className="flex flex-col gap-6 rounded-2.5xl bg-white p-6">
+          <h2 className="text-xl font-semibold">Enter your details below</h2>
+          <div className="flex justify-between">
+            <div className="flex items-center gap-4">
+              <input
+                className="relative flex h-8 w-8 cursor-pointer appearance-none items-center justify-center rounded-full border border-gray-200 before:h-3.5 before:w-3.5 before:rounded-full before:bg-blue-500 before:opacity-0 checked:border-indigo-50 checked:bg-indigo-50 checked:before:opacity-100"
+                type="radio"
+                name="measurement"
+                id="metric"
+                value=""
+              ></input>
+              <label className="cursor-pointer font-medium" htmlFor="metric">
+                Metric
+              </label>
+            </div>
+            <div className="flex items-center gap-4">
+              <input
+                className="relative flex h-8 w-8 cursor-pointer appearance-none items-center justify-center rounded-full border border-gray-200 before:h-3.5 before:w-3.5 before:rounded-full before:bg-blue-500 before:opacity-0 checked:border-indigo-50 checked:bg-indigo-50 checked:before:opacity-100"
+                type="radio"
+                name="measurement"
+                id="imperial"
+              />
+              <label className="cursor-pointer font-medium" htmlFor="imperial">
+                Imperial
+              </label>
+            </div>
+          </div>
+          <div className="flex flex-col gap-4.5">
+            <div className="flex flex-col gap-2.5">
+              <label className="text-sm font-medium text-gray-500" htmlFor="height">
+                Height
+              </label>
+              <div className="relative flex items-center">
+                <input
+                  className="w-full rounded-xl border border-gray-200 px-6 py-4 text-xl font-semibold text-blue-900 outline-none placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
+                  type="text"
+                  id="height"
+                  placeholder="0"
+                />
+                <span className="absolute right-6 text-xl font-semibold text-blue-500">cm</span>
               </div>
             </div>
-            <div>
-              <label htmlFor="weight">Weight</label>
-              <div>
-                <input type="text" id="weight" />
-                <span></span>
+            <div className="flex flex-col gap-2.5">
+              <label className="text-sm font-medium text-gray-500" htmlFor="weight">
+                Weight
+              </label>
+              <div className="relative flex items-center">
+                <input
+                  className="w-full rounded-xl border border-gray-200 px-6 py-4 text-xl font-semibold text-blue-900 outline-none placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
+                  type="text"
+                  id="weight"
+                  placeholder="0"
+                />
+                <span className="absolute right-6 text-xl font-semibold text-blue-500">cm</span>
               </div>
             </div>
+          </div>
 
-            <div>
-              <h3>Welcome!</h3>
-              <p>Enter your height and weight and you’ll see your BMI result here</p>
-            </div>
+          <div className="flex flex-col gap-4 rounded-2xl bg-blue-500 p-6">
+            <>
+              <h3 className="text-xl font-semibold text-white">Welcome!</h3>
+              <p className="text-white">Enter your height and weight and you’ll see your BMI result here</p>
+            </>
+            {/* <>
+              <div>
+                <h3 className="mb-2 font-semibold text-white">Your BMI is...</h3>
+                <span className="text-5xl font-semibold text-white">23.4</span>
+              </div>
+              <p className="text-white">
+                Your BMI suggests you’re a healthy weight. Your ideal weight is between <span className="font-semibold">63.3kgs - 85.2kgs</span>.
+              </p>
+            </> */}
           </div>
         </div>
       </section>

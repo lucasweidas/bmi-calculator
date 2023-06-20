@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         gray: {
           200: 'hsl(0, 0%, 87%)',
+          300: 'hsl(220, 3%, 81%)',
           500: 'hsl(208, 11%, 47%)',
         },
         pink: {
@@ -48,6 +49,9 @@ module.exports = {
       borderRadius: {
         '2.5xl': '1.25rem',
         '5xl': '2.5rem',
+      },
+      gap: {
+        4.5: '1.125rem',
       },
     },
   },
