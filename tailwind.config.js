@@ -6,6 +6,9 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-inter)'],
       },
+      fontSize: {
+        '2lg': '1.375rem',
+      },
       colors: {
         gray: {
           200: 'hsl(0, 0%, 87%)',
@@ -48,10 +51,17 @@ module.exports = {
       },
       borderRadius: {
         '2.5xl': '1.25rem',
+        '4xl': '2rem',
         '5xl': '2.5rem',
       },
       gap: {
         4.5: '1.125rem',
+      },
+      padding: {
+        12.5: '3.25rem',
+      },
+      backgroundImage: {
+        'linear-gradient-blue-50': 'linear-gradient(135deg, hsla(220, 82%, 98%, 0.2) 0%, hsla(220, 82%, 98%, 0.5) 52.21%, hsl(220, 82%, 98%) 100%)',
       },
     },
   },

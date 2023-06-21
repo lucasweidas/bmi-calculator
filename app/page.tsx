@@ -1,101 +1,107 @@
 import Image from 'next/image';
-// TODO: continue styling the custom radio (remove the border if checked)
+
 export default function Home() {
   return (
     <main>
-      <section className="rounded-b-5xl bg-slate-200 px-6">
-        <div className="flex flex-col items-center gap-6 pt-8">
-          <Image src="/images/logo.svg" alt="" width={60} height={60} className="h-10 w-10" aria-hidden="true" />
-          <h1 className="text-center text-5xl font-semibold leading-tight text-blue-800">Body Mass Index Calculator</h1>
-          <p className="text-center text-gray-500">
-            Better understand your weight in relation to your height using our body mass index (BM) calculator. While BMI is not the sole determinant of a
-            healthy weight, it offers a valuable starting point to evaluate your overall health and well-being.
-          </p>
-        </div>
-
-        <div className="flex flex-col gap-6 rounded-2.5xl bg-white p-6">
-          <h2 className="text-xl font-semibold">Enter your details below</h2>
-          <div className="flex justify-between">
-            <div className="flex items-center gap-4">
-              <input
-                className="relative flex h-8 w-8 cursor-pointer appearance-none items-center justify-center rounded-full border border-gray-200 before:h-3.5 before:w-3.5 before:rounded-full before:bg-blue-500 before:opacity-0 checked:border-indigo-50 checked:bg-indigo-50 checked:before:opacity-100"
-                type="radio"
-                name="measurement"
-                id="metric"
-                value=""
-              ></input>
-              <label className="cursor-pointer font-medium" htmlFor="metric">
-                Metric
-              </label>
-            </div>
-            <div className="flex items-center gap-4">
-              <input
-                className="relative flex h-8 w-8 cursor-pointer appearance-none items-center justify-center rounded-full border border-gray-200 before:h-3.5 before:w-3.5 before:rounded-full before:bg-blue-500 before:opacity-0 checked:border-indigo-50 checked:bg-indigo-50 checked:before:opacity-100"
-                type="radio"
-                name="measurement"
-                id="imperial"
-              />
-              <label className="cursor-pointer font-medium" htmlFor="imperial">
-                Imperial
-              </label>
-            </div>
+      <section className="rounded-b-5xl bg-slate-200 px-6 pb-52">
+        <div className="relative flex flex-col items-center">
+          <div className="flex flex-col items-center gap-6 pb-10 pt-8">
+            <Image src="/images/logo.svg" alt="" width={60} height={60} className="h-10 w-10" aria-hidden="true" />
+            <h1 className="text-center text-5xl font-semibold leading-tight text-blue-800">Body Mass Index Calculator</h1>
+            <p className="text-center text-gray-500">
+              Better understand your weight in relation to your height using our body mass index (BM) calculator. While BMI is not the sole determinant of a
+              healthy weight, it offers a valuable starting point to evaluate your overall health and well-being.
+            </p>
           </div>
-          <div className="flex flex-col gap-4.5">
-            <div className="flex flex-col gap-2.5">
-              <label className="text-sm font-medium text-gray-500" htmlFor="height">
-                Height
-              </label>
-              <div className="relative flex items-center">
+          <div className="absolute top-full flex flex-col gap-6 rounded-2.5xl bg-white p-6 shadow-md">
+            <h2 className="text-xl font-semibold">Enter your details below</h2>
+            <div className="flex flex-wrap justify-between gap-4">
+              <div className="flex items-center gap-4">
                 <input
-                  className="w-full rounded-xl border border-gray-200 px-6 py-4 text-xl font-semibold text-blue-900 outline-none placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
-                  type="text"
-                  id="height"
-                  placeholder="0"
+                  className="relative flex h-8 w-8 cursor-pointer appearance-none items-center justify-center rounded-full outline-none ring-1 ring-gray-200 before:h-3.5 before:w-3.5 before:rounded-full before:bg-blue-500 before:opacity-0 checked:bg-indigo-50 checked:ring-indigo-50 checked:before:opacity-100 focus-visible:ring-2 focus-visible:ring-blue-500"
+                  type="radio"
+                  name="measurement"
+                  id="metric"
+                  value=""
+                ></input>
+                <label className="cursor-pointer font-medium" htmlFor="metric">
+                  Metric
+                </label>
+              </div>
+              <div className="flex items-center gap-4">
+                <input
+                  className="relative flex h-8 w-8 cursor-pointer appearance-none items-center justify-center rounded-full outline-none ring-1 ring-gray-200 before:h-3.5 before:w-3.5 before:rounded-full before:bg-blue-500 before:opacity-0 checked:bg-indigo-50 checked:ring-indigo-50 checked:before:opacity-100 focus-visible:ring-2 focus-visible:ring-blue-500"
+                  type="radio"
+                  name="measurement"
+                  id="imperial"
                 />
-                <span className="absolute right-6 text-xl font-semibold text-blue-500">cm</span>
+                <label className="cursor-pointer font-medium" htmlFor="imperial">
+                  Imperial
+                </label>
               </div>
             </div>
-            <div className="flex flex-col gap-2.5">
-              <label className="text-sm font-medium text-gray-500" htmlFor="weight">
-                Weight
-              </label>
-              <div className="relative flex items-center">
-                <input
-                  className="w-full rounded-xl border border-gray-200 px-6 py-4 text-xl font-semibold text-blue-900 outline-none placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
-                  type="text"
-                  id="weight"
-                  placeholder="0"
-                />
-                <span className="absolute right-6 text-xl font-semibold text-blue-500">cm</span>
+            <div className="flex flex-col gap-4.5">
+              <div className="flex flex-col gap-2.5">
+                <label className="text-sm font-medium text-gray-500" htmlFor="height">
+                  Height
+                </label>
+                <div className="relative flex items-center">
+                  <input
+                    className="w-full rounded-xl px-6 py-4 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
+                    type="text"
+                    id="height"
+                    placeholder="0"
+                  />
+                  <span className="absolute right-6 text-xl font-semibold text-blue-500">cm</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-2.5">
+                <label className="text-sm font-medium text-gray-500" htmlFor="weight">
+                  Weight
+                </label>
+                <div className="relative flex items-center">
+                  <input
+                    className="w-full rounded-xl px-6 py-4 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
+                    type="text"
+                    id="weight"
+                    placeholder="0"
+                  />
+                  <span className="absolute right-6 text-xl font-semibold text-blue-500">cm</span>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className="flex flex-col gap-4 rounded-2xl bg-blue-500 p-6">
-            <>
-              <h3 className="text-xl font-semibold text-white">Welcome!</h3>
-              <p className="text-white">Enter your height and weight and you’ll see your BMI result here</p>
-            </>
-            {/* <>
-              <div>
-                <h3 className="mb-2 font-semibold text-white">Your BMI is...</h3>
-                <span className="text-5xl font-semibold text-white">23.4</span>
-              </div>
-              <p className="text-white">
-                Your BMI suggests you’re a healthy weight. Your ideal weight is between <span className="font-semibold">63.3kgs - 85.2kgs</span>.
-              </p>
-            </> */}
+            <div className="flex flex-col gap-4 rounded-2xl bg-blue-500 p-6">
+              <>
+                <h3 className="text-xl font-semibold text-white">Welcome!</h3>
+                <p className="text-white">Enter your height and weight and you’ll see your BMI result here</p>
+              </>
+              {/* <>
+                <div>
+                  <h3 className="mb-2 font-semibold text-white">Your BMI is...</h3>
+                  <span className="text-5xl font-semibold text-white">23.4</span>
+                </div>
+                <p className="text-white">
+                  Your BMI suggests you’re a healthy weight. Your ideal weight is between <span className="font-semibold">63.3kgs - 85.2kgs</span>.
+                </p>
+              </> */}
+            </div>
           </div>
         </div>
       </section>
 
-      <section>
-        <div>
-          <Image src="/images/person-eating.png" alt="A person eating asian food" width={311} height={333} />
+      <section className="mt-[34rem]">
+        <div className="relative flex aspect-video justify-center rounded-4xl bg-sky-50">
+          <Image
+            src="/images/person-eating.png"
+            alt="A person eating asian food"
+            width={311}
+            height={333}
+            className="absolute bottom-0 w-[min(100%-4rem,25rem)]"
+          />
         </div>
-        <div>
-          <h2>What your BMI result means</h2>
-          <p>
+        <div className="px-5 pt-10">
+          <h2 className="mb-6 text-3xl font-semibold text-blue-800">What your BMI result means</h2>
+          <p className="text-gray-500">
             A BMI range of 18.5 to 24.9 is considered a ‘healthy weight’. Maintaining a healthy weight may lower your changes of experiencing health issues
             later on, such as obesity and type 2 diabetes. Aim for a nutritious diet with reduced fat and sugar content, incorporating ample fruits and
             vegetables. Additionally, strive for regular physical activity, ideally about 30 minutes daily for five days a week.
@@ -103,86 +109,90 @@ export default function Home() {
         </div>
       </section>
 
-      <section>
-        <div>
-          <div>
-            <Image src="/images/bowl.svg" alt="" width={32} height={32} aria-hidden="true" />
+      <section className="mt-16 flex flex-col gap-10 bg-linear-gradient-blue-50 px-5 py-12.5">
+        <div className="flex flex-col gap-5">
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-pink-100">
+            <Image src="/images/bowl.svg" alt="" width={26} height={32} aria-hidden="true" />
           </div>
           <div>
-            <h3>Healthy eating</h3>
-            <p>Healthy eating promotes weight control, disease prevention, better digestion, immunity, mental clarity, and mood.</p>
+            <h3 className="mb-5 text-2lg font-semibold text-blue-800">Healthy eating</h3>
+            <p className="text-gray-500">Healthy eating promotes weight control, disease prevention, better digestion, immunity, mental clarity, and mood.</p>
           </div>
         </div>
-        <div>
-          <div>
+        <div className="flex flex-col gap-5">
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-orange-100">
             <Image src="/images/gym.svg" alt="" width={32} height={32} aria-hidden="true" />
           </div>
           <div>
-            <h3>Regular exercise</h3>
-            <p>Exercise improves fitness, aids weight control, elevates mood, and reduces disease risk, fostering wellness and longevity.</p>
+            <h3 className="mb-5 text-2lg font-semibold text-blue-800">Regular exercise</h3>
+            <p className="text-gray-500">
+              Exercise improves fitness, aids weight control, elevates mood, and reduces disease risk, fostering wellness and longevity.
+            </p>
           </div>
         </div>
-        <div>
-          <div>
+        <div className="flex flex-col gap-5">
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-turquoise-100">
             <Image src="/images/night.svg" alt="" width={32} height={32} aria-hidden="true" />
           </div>
           <div>
-            <h3>Adequate sleep</h3>
-            <p>Sleep enhances mental clarity, emotional stability, and physical wellness, promoting overall restoration and rejuvenation.</p>
+            <h3 className="mb-5 text-2lg font-semibold text-blue-800">Adequate sleep</h3>
+            <p className="text-gray-500">
+              Sleep enhances mental clarity, emotional stability, and physical wellness, promoting overall restoration and rejuvenation.
+            </p>
           </div>
         </div>
       </section>
 
-      <section>
-        <div>
-          <h2>Limitations of BMI</h2>
-          <p>
+      <section className="mt-14 px-5">
+        <div className="mb-14">
+          <h2 className="mb-7 text-center text-3xl font-semibold text-blue-800">Limitations of BMI</h2>
+          <p className="text-center text-gray-500">
             Although BMI is often a practical indicator of healthy weight, it is not suited for every person. Specific groups should carefully consider their
             BMI outcomes, and in certain cases, the measurement may not be beneficial to use.
           </p>
         </div>
 
-        <div>
-          <div>
-            <div>
+        <div className="flex flex-col gap-4">
+          <div className="rounded-2.5xl p-5 shadow-md">
+            <div className="mb-4 flex gap-3.5">
               <Image src="/images/gender.svg" alt="" width={32} height={32} aria-hidden="true" />
-              <h3>Gender</h3>
+              <h3 className="text-lg font-semibold text-blue-800">Gender</h3>
             </div>
-            <p>
+            <p className="text-gray-500">
               The development and body fat composition of girls adn boys vary with age. Consequently, a child’s age and gender are considered when evaluating
               their BMI.
             </p>
           </div>
-          <div>
-            <div>
+          <div className="rounded-2.5xl p-5 shadow-md">
+            <div className="mb-4 flex gap-3.5">
               <Image src="/images/cake.svg" alt="" width={32} height={32} aria-hidden="true" />
-              <h3>Age</h3>
+              <h3 className="text-lg font-semibold text-blue-800">Age</h3>
             </div>
-            <p>In aging individuals, increased body fat and muscle loss may cause BMI to underestimate body fat content.</p>
+            <p className="text-gray-500">In aging individuals, increased body fat and muscle loss may cause BMI to underestimate body fat content.</p>
           </div>
-          <div>
-            <div>
+          <div className="rounded-2.5xl p-5 shadow-md">
+            <div className="mb-4 flex gap-3.5">
               <Image src="/images/muscle.svg" alt="" width={32} height={32} aria-hidden="true" />
-              <h3>Muscle</h3>
+              <h3 className="text-lg font-semibold text-blue-800">Muscle</h3>
             </div>
-            <p>BMI may misclassify muscular individuals as overweight or obese, as it doesn’t differentiate muscle from fat.</p>
+            <p className="text-gray-500">BMI may misclassify muscular individuals as overweight or obese, as it doesn’t differentiate muscle from fat.</p>
           </div>
-          <div>
-            <div>
-              <Image src="/images/bady.svg" alt="" width={32} height={32} aria-hidden="true" />
-              <h3>Pregnancy</h3>
+          <div className="rounded-2.5xl p-5 shadow-md">
+            <div className="mb-4 flex gap-3.5">
+              <Image src="/images/baby.svg" alt="" width={32} height={32} aria-hidden="true" />
+              <h3 className="text-lg font-semibold text-blue-800">Pregnancy</h3>
             </div>
-            <p>
+            <p className="text-gray-500">
               Expectant mothers experience weight gain due to their growing baby. Maintaining a healthy pre-pregnancy BMI is advisable to minimise health risks
               for both mother and child.
             </p>
           </div>
-          <div>
-            <div>
+          <div className="rounded-2.5xl p-5 shadow-md">
+            <div className="mb-4 flex gap-3.5">
               <Image src="/images/person.svg" alt="" width={32} height={32} aria-hidden="true" />
-              <h3>Race</h3>
+              <h3 className="text-lg font-semibold text-blue-800">Race</h3>
             </div>
-            <p>
+            <p className="text-gray-500">
               Certain health concerns may affect individuals of some Black and Asian origins at lower BMIs than others. To learn more, it is advised to discuss
               this with your GP or practice nurse.
             </p>
