@@ -1,9 +1,36 @@
+'use client';
 import Image from 'next/image';
+import React, { useState } from 'react';
+
+function calculateBMI(height: string, weight: string) {
+  if (height === '' || weight === '') {
+    return 0;
+  }
+  return +weight / (+height) ** 2;
+}
 
 export default function Home() {
+  const [measurement, setMeasurement] = useState('metric');
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const bmi = calculateBMI(height, weight);
+
+  function handleMeasurementChange({ target }: React.ChangeEvent<HTMLInputElement>) {
+    setMeasurement(target.id);
+  }
+
+  function handleValueChange({ target }: React.ChangeEvent<HTMLInputElement>) {
+    if (+target.value < 0) return;
+    if (target.id === 'height') {
+      setHeight(target.value);
+    } else {
+      setWeight(target.value);
+    }
+  }
+
   return (
     <main>
-      <section className="rounded-b-5xl bg-slate-200 px-6 pb-52">
+      <section className="rounded-b-5xl bg-linear-gradient-blue-200 px-6 pb-52">
         <div className="relative flex flex-col items-center">
           <div className="flex flex-col items-center gap-6 pb-10 pt-8">
             <Image src="/images/logo.svg" alt="" width={60} height={60} className="h-10 w-10" aria-hidden="true" />
@@ -13,7 +40,7 @@ export default function Home() {
               healthy weight, it offers a valuable starting point to evaluate your overall health and well-being.
             </p>
           </div>
-          <div className="absolute top-full flex flex-col gap-6 rounded-2.5xl bg-white p-6 shadow-md">
+          <div className="absolute top-full flex flex-col gap-6 rounded-2.5xl bg-white p-6 shadow-card">
             <h2 className="text-xl font-semibold">Enter your details below</h2>
             <div className="flex flex-wrap justify-between gap-4">
               <div className="flex items-center gap-4">
@@ -22,8 +49,9 @@ export default function Home() {
                   type="radio"
                   name="measurement"
                   id="metric"
-                  value=""
-                ></input>
+                  onChange={handleMeasurementChange}
+                  defaultChecked={true}
+                />
                 <label className="cursor-pointer font-medium" htmlFor="metric">
                   Metric
                 </label>
@@ -34,6 +62,7 @@ export default function Home() {
                   type="radio"
                   name="measurement"
                   id="imperial"
+                  onChange={handleMeasurementChange}
                 />
                 <label className="cursor-pointer font-medium" htmlFor="imperial">
                   Imperial
@@ -51,8 +80,10 @@ export default function Home() {
                     type="text"
                     id="height"
                     placeholder="0"
+                    value={height}
+                    onChange={handleValueChange}
                   />
-                  <span className="absolute right-6 text-xl font-semibold text-blue-500">cm</span>
+                  <span className="absolute right-6 text-xl font-semibold text-blue-500">{measurement === 'metric' ? 'cm' : 'in'}</span>
                 </div>
               </div>
               <div className="flex flex-col gap-2.5">
@@ -65,25 +96,30 @@ export default function Home() {
                     type="text"
                     id="weight"
                     placeholder="0"
+                    value={weight}
+                    onChange={handleValueChange}
                   />
-                  <span className="absolute right-6 text-xl font-semibold text-blue-500">cm</span>
+                  <span className="absolute right-6 text-xl font-semibold text-blue-500">{measurement === 'metric' ? 'kg' : 'lbs'}</span>
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-4 rounded-2xl bg-blue-500 p-6">
-              <>
-                <h3 className="text-xl font-semibold text-white">Welcome!</h3>
-                <p className="text-white">Enter your height and weight and you’ll see your BMI result here</p>
-              </>
-              {/* <>
-                <div>
-                  <h3 className="mb-2 font-semibold text-white">Your BMI is...</h3>
-                  <span className="text-5xl font-semibold text-white">23.4</span>
-                </div>
-                <p className="text-white">
-                  Your BMI suggests you’re a healthy weight. Your ideal weight is between <span className="font-semibold">63.3kgs - 85.2kgs</span>.
-                </p>
-              </> */}
+            <div className="flex flex-col gap-4 rounded-2xl bg-linear-gradient-blue-500 p-6">
+              {bmi === 0 ? (
+                <>
+                  <h3 className="text-xl font-semibold text-white">Welcome!</h3>
+                  <p className="text-white">Enter your height and weight and you’ll see your BMI result here</p>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <h3 className="mb-2 font-semibold text-white">Your BMI is...</h3>
+                    <span className="text-5xl font-semibold text-white">{bmi.toFixed(1)}</span>
+                  </div>
+                  <p className="text-white">
+                    Your BMI suggests you’re a healthy weight. Your ideal weight is between <span className="font-semibold">63kgs - 85kgs</span>.
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -143,7 +179,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mt-14 px-5">
+      <section className="mt-14 px-5 pb-24">
         <div className="mb-14">
           <h2 className="mb-7 text-center text-3xl font-semibold text-blue-800">Limitations of BMI</h2>
           <p className="text-center text-gray-500">
@@ -153,8 +189,8 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col gap-4">
-          <div className="rounded-2.5xl p-5 shadow-md">
-            <div className="mb-4 flex gap-3.5">
+          <div className="rounded-2.5xl p-5 shadow-card">
+            <div className="mb-4 flex items-center gap-3.5">
               <Image src="/images/gender.svg" alt="" width={32} height={32} aria-hidden="true" />
               <h3 className="text-lg font-semibold text-blue-800">Gender</h3>
             </div>
@@ -163,22 +199,22 @@ export default function Home() {
               their BMI.
             </p>
           </div>
-          <div className="rounded-2.5xl p-5 shadow-md">
-            <div className="mb-4 flex gap-3.5">
+          <div className="rounded-2.5xl p-5 shadow-card">
+            <div className="mb-4 flex items-center gap-3.5">
               <Image src="/images/cake.svg" alt="" width={32} height={32} aria-hidden="true" />
               <h3 className="text-lg font-semibold text-blue-800">Age</h3>
             </div>
             <p className="text-gray-500">In aging individuals, increased body fat and muscle loss may cause BMI to underestimate body fat content.</p>
           </div>
-          <div className="rounded-2.5xl p-5 shadow-md">
-            <div className="mb-4 flex gap-3.5">
+          <div className="rounded-2.5xl p-5 shadow-card">
+            <div className="mb-4 flex items-center gap-3.5">
               <Image src="/images/muscle.svg" alt="" width={32} height={32} aria-hidden="true" />
               <h3 className="text-lg font-semibold text-blue-800">Muscle</h3>
             </div>
             <p className="text-gray-500">BMI may misclassify muscular individuals as overweight or obese, as it doesn’t differentiate muscle from fat.</p>
           </div>
-          <div className="rounded-2.5xl p-5 shadow-md">
-            <div className="mb-4 flex gap-3.5">
+          <div className="rounded-2.5xl p-5 shadow-card">
+            <div className="mb-4 flex items-center gap-3.5">
               <Image src="/images/baby.svg" alt="" width={32} height={32} aria-hidden="true" />
               <h3 className="text-lg font-semibold text-blue-800">Pregnancy</h3>
             </div>
@@ -187,8 +223,8 @@ export default function Home() {
               for both mother and child.
             </p>
           </div>
-          <div className="rounded-2.5xl p-5 shadow-md">
-            <div className="mb-4 flex gap-3.5">
+          <div className="rounded-2.5xl p-5 shadow-card">
+            <div className="mb-4 flex items-center gap-3.5">
               <Image src="/images/person.svg" alt="" width={32} height={32} aria-hidden="true" />
               <h3 className="text-lg font-semibold text-blue-800">Race</h3>
             </div>

@@ -62,6 +62,12 @@ module.exports = {
       },
       backgroundImage: {
         'linear-gradient-blue-50': 'linear-gradient(135deg, hsla(220, 82%, 98%, 0.2) 0%, hsla(220, 82%, 98%, 0.5) 52.21%, hsl(220, 82%, 98%) 100%)',
+        'linear-gradient-blue-200':
+          'linear-gradient(135deg, hsla(203, 92%, 95%, 0.2) 0%, hsla(203, 92%, 95%, 0.4) 24.66%, hsla(203, 92%, 95%, 0.7) 39.96%, hsl(215, 95%, 92%) 100%)',
+        'linear-gradient-blue-500': 'linear-gradient(90deg, hsl(226, 92%, 59%) 0%, hsla(226, 92%, 59%, 0.85) 100%)',
+      },
+      boxShadow: {
+        card: '8px 12px 24px 6px hsla(227, 55%, 51%, 0.08)',
       },
     },
   },
