@@ -10,13 +10,13 @@ function calculateBMI(height: string, weight: string) {
 }
 
 export default function Home() {
-  const [measurement, setMeasurement] = useState('metric');
-  const [height, setHeight] = useState('');
-  const [weight, setWeight] = useState('');
+  const [isMetric, setIsMetric] = useState<boolean>(true);
+  const [height, setHeight] = useState<string>('');
+  const [weight, setWeight] = useState<string>('');
   const bmi = calculateBMI(height, weight);
 
-  function handleMeasurementChange({ target }: React.ChangeEvent<HTMLInputElement>) {
-    setMeasurement(target.id);
+  function handleMeasurementChange() {
+    setIsMetric(!isMetric);
   }
 
   function handleValueChange({ target }: React.ChangeEvent<HTMLInputElement>) {
@@ -83,7 +83,7 @@ export default function Home() {
                     value={height}
                     onChange={handleValueChange}
                   />
-                  <span className="absolute right-6 text-xl font-semibold text-blue-500">{measurement === 'metric' ? 'cm' : 'in'}</span>
+                  <span className="absolute right-6 text-xl font-semibold text-blue-500">{isMetric ? 'cm' : 'in'}</span>
                 </div>
               </div>
               <div className="flex flex-col gap-2.5">
@@ -99,7 +99,7 @@ export default function Home() {
                     value={weight}
                     onChange={handleValueChange}
                   />
-                  <span className="absolute right-6 text-xl font-semibold text-blue-500">{measurement === 'metric' ? 'kg' : 'lbs'}</span>
+                  <span className="absolute right-6 text-xl font-semibold text-blue-500">{isMetric ? 'kg' : 'lbs'}</span>
                 </div>
               </div>
             </div>
@@ -184,7 +184,7 @@ export default function Home() {
           <h2 className="mb-7 text-center text-3xl font-semibold text-blue-800">Limitations of BMI</h2>
           <p className="text-center text-gray-500">
             Although BMI is often a practical indicator of healthy weight, it is not suited for every person. Specific groups should carefully consider their
-            BMI outcomes, and in certain cases, the measurement may not be beneficial to use.
+            BMI outcomes, and in certain cases, the isMetric may not be beneficial to use.
           </p>
         </div>
 
