@@ -2,25 +2,31 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 
-function calculateBMI(height: string, weight: string) {
-  if (height === '' || weight === '') {
+// TODO: make calculation between different measurement systems
+
+function calculateBMI(isMetric: boolean, height: string, weight: string) {
+  if (+height === 0 || +weight === 0) {
     return 0;
   }
-  return +weight / (+height) ** 2;
+  if (isMetric) {
+    return +weight / (+height) ** 2;
+  }
+  const [feet, inches] = height.trim().split(' ');
+  return (+weight * 703) / (+feet * 12 + +inches);
 }
 
 export default function Home() {
   const [isMetric, setIsMetric] = useState<boolean>(true);
   const [height, setHeight] = useState<string>('');
   const [weight, setWeight] = useState<string>('');
-  const bmi = calculateBMI(height, weight);
+  const bmi = calculateBMI(isMetric, height, weight);
 
   function handleMeasurementChange() {
     setIsMetric(!isMetric);
   }
 
   function handleValueChange({ target }: React.ChangeEvent<HTMLInputElement>) {
-    if (+target.value < 0) return;
+    if (+target.value < 0 || isNaN(+target.value)) return;
     if (target.id === 'height') {
       setHeight(target.value);
     } else {
@@ -69,40 +75,7 @@ export default function Home() {
                 </label>
               </div>
             </div>
-            <div className="flex flex-col gap-4.5">
-              <div className="flex flex-col gap-2.5">
-                <label className="text-sm font-medium text-gray-500" htmlFor="height">
-                  Height
-                </label>
-                <div className="relative flex items-center">
-                  <input
-                    className="w-full rounded-xl px-6 py-4 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
-                    type="text"
-                    id="height"
-                    placeholder="0"
-                    value={height}
-                    onChange={handleValueChange}
-                  />
-                  <span className="absolute right-6 text-xl font-semibold text-blue-500">{isMetric ? 'cm' : 'in'}</span>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2.5">
-                <label className="text-sm font-medium text-gray-500" htmlFor="weight">
-                  Weight
-                </label>
-                <div className="relative flex items-center">
-                  <input
-                    className="w-full rounded-xl px-6 py-4 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
-                    type="text"
-                    id="weight"
-                    placeholder="0"
-                    value={weight}
-                    onChange={handleValueChange}
-                  />
-                  <span className="absolute right-6 text-xl font-semibold text-blue-500">{isMetric ? 'kg' : 'lbs'}</span>
-                </div>
-              </div>
-            </div>
+            <div className="flex flex-col gap-4.5">{isMetric ? <MetricInputs /> : <ImperialInputs />}</div>
             <div className="flex flex-col gap-4 rounded-2xl bg-linear-gradient-blue-500 p-6">
               {bmi === 0 ? (
                 <>
@@ -236,5 +209,101 @@ export default function Home() {
         </div>
       </section>
     </main>
+  );
+}
+
+function MetricInputs() {
+  const [centimeters, setCentimeters] = useState<string>('');
+  const [kilograms, setKilograms] = useState<string>('');
+
+  return (
+    <>
+      <div className="flex flex-col gap-2.5">
+        <label className="text-sm font-medium text-gray-500" htmlFor="centimeters">
+          Height
+        </label>
+        <div className="relative flex items-center">
+          <input
+            className="w-full rounded-xl px-6 py-4 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
+            type="text"
+            id="centimeters"
+            placeholder="0"
+            value={centimeters}
+            onChange={e => setCentimeters(e.target.value)}
+          />
+          <span className="absolute right-6 text-xl font-semibold text-blue-500">cm</span>
+        </div>
+      </div>
+      <div className="flex flex-col gap-2.5">
+        <label className="text-sm font-medium text-gray-500" htmlFor="kilograms">
+          Weight
+        </label>
+        <div className="relative flex items-center">
+          <input
+            className="w-full rounded-xl px-6 py-4 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
+            type="text"
+            id="kilograms"
+            placeholder="0"
+            value={kilograms}
+            onChange={e => setKilograms(e.target.value)}
+          />
+          <span className="absolute right-6 text-xl font-semibold text-blue-500">kg</span>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function ImperialInputs() {
+  const [feet, setFeet] = useState<string>('');
+  const [inches, setInches] = useState<string>('');
+  const [pounds, setPounds] = useState<string>('');
+
+  return (
+    <>
+      <div className="flex flex-col gap-2.5">
+        <label className="text-sm font-medium text-gray-500" htmlFor="feet">
+          Height
+        </label>
+        <div className="relative flex items-center">
+          <input
+            className="w-full rounded-xl px-6 py-4 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
+            type="text"
+            id="feet"
+            placeholder="0"
+            value={feet}
+            onChange={e => setFeet(e.target.value)}
+          />
+          <span className="absolute right-6 text-xl font-semibold text-blue-500">ft</span>
+        </div>
+        <div className="relative flex items-center">
+          <input
+            className="w-full rounded-xl px-6 py-4 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
+            type="text"
+            id="inches"
+            placeholder="0"
+            value={inches}
+            onChange={e => setInches(e.target.value)}
+          />
+          <span className="absolute right-6 text-xl font-semibold text-blue-500">in</span>
+        </div>
+      </div>
+      <div className="flex flex-col gap-2.5">
+        <label className="text-sm font-medium text-gray-500" htmlFor="pounds">
+          Weight
+        </label>
+        <div className="relative flex items-center">
+          <input
+            className="w-full rounded-xl px-6 py-4 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
+            type="text"
+            id="pounds"
+            placeholder="0"
+            value={pounds}
+            onChange={e => setPounds(e.target.value)}
+          />
+          <span className="absolute right-6 text-xl font-semibold text-blue-500">lbs</span>
+        </div>
+      </div>
+    </>
   );
 }
