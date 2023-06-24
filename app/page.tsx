@@ -55,8 +55,8 @@ export default function Home() {
                   type="radio"
                   name="measurement"
                   id="metric"
-                  onChange={handleMeasurementChange}
                   defaultChecked={true}
+                  onChange={handleMeasurementChange}
                 />
                 <label className="cursor-pointer font-medium" htmlFor="metric">
                   Metric
