@@ -1,35 +1,27 @@
 'use client';
-import { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent, ChangeEventHandler } from 'react';
 import { useState } from 'react';
 
-function calculateBMI(isMetric: boolean, height: string, weight: string) {
-  if (+height === 0 || +weight === 0) {
+function calculateBMI(height: number, weight: number) {
+  if (height === 0 || weight === 0) {
     return 0;
   }
-  if (isMetric) {
-    return +weight / (+height) ** 2;
-  }
-  const [feet, inches] = height.trim().split(' ');
-  return (+weight * 703) / (+feet * 12 + +inches);
+  return (weight / (height / 100) ** 2).toFixed(2);
+}
+
+function imperialToMetric(feet: number, inches: number, pounds: number) {
+  const cm = +((feet * 12 + inches) * 2.54).toFixed(1);
+  const kg = +(pounds / 2.2046).toFixed(1);
+  return [cm, kg];
 }
 
 export default function Card() {
-  const [isMetric, setIsMetric] = useState<boolean>(true);
-  const [height, setHeight] = useState<string>('');
-  const [weight, setWeight] = useState<string>('');
-  const bmi = isMetric === null ? 0 : calculateBMI(isMetric, height, weight);
+  const [isMetric, setIsMetric] = useState(true);
+  const [bmi, setBMI] = useState(0);
 
   function handleMeasurementChange() {
     setIsMetric(!isMetric);
-  }
-
-  function handleValueChange({ target }: ChangeEvent<HTMLInputElement>) {
-    if (+target.value < 0 || isNaN(+target.value)) return;
-    if (target.id === 'height') {
-      setHeight(target.value);
-    } else {
-      setWeight(target.value);
-    }
+    setBMI(0);
   }
 
   return (
@@ -64,7 +56,7 @@ export default function Card() {
           </label>
         </div>
       </div>
-      <div className="flex flex-col gap-4.5">{isMetric ? <MetricInputs /> : <ImperialInputs />}</div>
+      <div className="flex flex-col gap-4.5">{isMetric ? <MetricInputs setBMI={setBMI} /> : <ImperialInputs setBMI={setBMI} />}</div>
       <div className="flex flex-col gap-4 rounded-2xl bg-linear-gradient-blue-500 p-6">
         {bmi === 0 ? (
           <>
@@ -75,7 +67,7 @@ export default function Card() {
           <>
             <div>
               <h3 className="mb-2 font-semibold text-white">Your BMI is...</h3>
-              <span className="text-5xl font-semibold text-white">{bmi.toFixed(1)}</span>
+              <span className="text-5xl font-semibold text-white">{bmi}</span>
             </div>
             <p className="text-white">
               Your BMI suggests you’re a healthy weight. Your ideal weight is between <span className="font-semibold">63kgs - 85kgs</span>.
@@ -87,9 +79,25 @@ export default function Card() {
   );
 }
 
-function MetricInputs() {
-  const [centimeters, setCentimeters] = useState<string>('');
-  const [kilograms, setKilograms] = useState<string>('');
+function MetricInputs({ setBMI }: { setBMI: Function }) {
+  const [centimeters, setCentimeters] = useState('');
+  const [kilograms, setKilograms] = useState('');
+
+  function handleChange({ target }: ChangeEvent<HTMLInputElement>) {
+    if (+target.value < 0 || isNaN(+target.value)) return;
+
+    let nextCentimeters = centimeters;
+    let nextKilograms = kilograms;
+
+    if (target.id === 'centimeters') {
+      nextCentimeters = target.value;
+      setCentimeters(nextCentimeters);
+    } else {
+      nextKilograms = target.value;
+      setKilograms(nextKilograms);
+    }
+    setBMI(calculateBMI(+nextCentimeters, +nextKilograms));
+  }
 
   return (
     <>
@@ -97,46 +105,47 @@ function MetricInputs() {
         <label className="text-sm font-medium text-gray-500" htmlFor="centimeters">
           Height
         </label>
-        <div className="relative flex items-center">
-          <input
-            className="w-full rounded-xl px-6 py-4 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
-            type="text"
-            id="centimeters"
-            placeholder="0"
-            value={centimeters}
-            onChange={e => setCentimeters(e.target.value)}
-          />
-          <span className="absolute right-6 text-xl font-semibold text-blue-500">cm</span>
-        </div>
+        <TextInput id="centimeters" placeholder="0" value={centimeters} onChange={handleChange}>
+          cm
+        </TextInput>
       </div>
       <div className="flex flex-col gap-2.5">
         <label className="text-sm font-medium text-gray-500" htmlFor="kilograms">
           Weight
         </label>
-        <div className="relative flex items-center">
-          <input
-            className="w-full rounded-xl px-6 py-4 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
-            type="text"
-            id="kilograms"
-            placeholder="0"
-            value={kilograms}
-            onChange={e => setKilograms(e.target.value)}
-          />
-          <span className="absolute right-6 text-xl font-semibold text-blue-500">kg</span>
-        </div>
+        <TextInput id="kilograms" placeholder="0" value={kilograms} onChange={handleChange}>
+          kg
+        </TextInput>
       </div>
     </>
   );
 }
 
-function ImperialInputs() {
-  const [feet, setFeet] = useState<string>('');
-  const [inches, setInches] = useState<string>('');
-  const [pounds, setPounds] = useState<string>('');
+function ImperialInputs({ setBMI }: { setBMI: Function }) {
+  const [feet, setFeet] = useState('');
+  const [inches, setInches] = useState('');
+  const [pounds, setPounds] = useState('');
 
-  useEffect(() => {
-    console.log(inches, pounds);
-  }, [inches, pounds]);
+  function handleChange({ target }: ChangeEvent<HTMLInputElement>) {
+    if (+target.value < 0 || isNaN(+target.value)) return;
+
+    let nextFeet = feet;
+    let nextInches = inches;
+    let nextPounds = pounds;
+
+    if (target.id === 'feet') {
+      nextFeet = target.value;
+      setFeet(nextFeet);
+    } else if (target.id === 'inches') {
+      nextInches = target.value;
+      setInches(nextInches);
+    } else {
+      nextPounds = target.value;
+      setPounds(nextPounds);
+    }
+    const [cm, kg] = imperialToMetric(+nextFeet, +nextInches, +nextPounds);
+    setBMI(calculateBMI(cm, kg));
+  }
 
   return (
     <>
@@ -144,45 +153,44 @@ function ImperialInputs() {
         <label className="text-sm font-medium text-gray-500" htmlFor="feet">
           Height
         </label>
-        <div className="relative flex items-center">
-          <input
-            className="w-full rounded-xl px-6 py-4 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
-            type="text"
-            id="feet"
-            placeholder="0"
-            value={feet}
-            onChange={e => setFeet(e.target.value)}
-          />
-          <span className="absolute right-6 text-xl font-semibold text-blue-500">ft</span>
-        </div>
-        <div className="relative flex items-center">
-          <input
-            className="w-full rounded-xl px-6 py-4 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
-            type="text"
-            id="inches"
-            placeholder="0"
-            value={inches}
-            onChange={e => setInches(e.target.value)}
-          />
-          <span className="absolute right-6 text-xl font-semibold text-blue-500">in</span>
-        </div>
+        <TextInput id="feet" placeholder="0" value={feet} onChange={handleChange}>
+          ft
+        </TextInput>
+        <TextInput id="inches" placeholder="0" value={inches} onChange={handleChange}>
+          in
+        </TextInput>
       </div>
       <div className="flex flex-col gap-2.5">
         <label className="text-sm font-medium text-gray-500" htmlFor="pounds">
           Weight
         </label>
-        <div className="relative flex items-center">
-          <input
-            className="w-full rounded-xl px-6 py-4 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
-            type="text"
-            id="pounds"
-            placeholder="0"
-            value={pounds}
-            onChange={e => setPounds(e.target.value)}
-          />
-          <span className="absolute right-6 text-xl font-semibold text-blue-500">lbs</span>
-        </div>
+        <TextInput id="pounds" placeholder="0" value={pounds} onChange={handleChange}>
+          lbs
+        </TextInput>
       </div>
     </>
+  );
+}
+
+interface TextInput {
+  children: string;
+  id: string;
+  placeholder: string;
+  value: string;
+  onChange: ChangeEventHandler;
+}
+function TextInput({ children, id, placeholder, value, onChange }: TextInput) {
+  return (
+    <div className="relative flex items-center">
+      <input
+        className="w-full rounded-xl px-6 py-4 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
+        type="text"
+        id={id}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+      />
+      <span className="absolute right-6 text-xl font-semibold text-blue-500">{children}</span>
+    </div>
   );
 }

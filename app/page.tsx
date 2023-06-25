@@ -26,6 +26,7 @@ export default function Home() {
             width={311}
             height={333}
             className="absolute bottom-0 w-[min(100%-4rem,25rem)]"
+            priority
           />
         </div>
         <div className="px-5 pt-10">
