@@ -32,9 +32,9 @@ export default function Home() {
         <div className="px-5 pt-10">
           <h2 className="mb-6 text-3xl font-semibold text-blue-800">What your BMI result means</h2>
           <p className="text-gray-500">
-            A BMI range of 18.5 to 24.9 is considered a ‘healthy weight’. Maintaining a healthy weight may lower your changes of experiencing health issues
-            later on, such as obesity and type 2 diabetes. Aim for a nutritious diet with reduced fat and sugar content, incorporating ample fruits and
-            vegetables. Additionally, strive for regular physical activity, ideally about 30 minutes daily for five days a week.
+            A BMI range of 18.5 to 24.9 is considered a &#x2018;healthy weight&#x2019;. Maintaining a healthy weight may lower your changes of experiencing
+            health issues later on, such as obesity and type 2 diabetes. Aim for a nutritious diet with reduced fat and sugar content, incorporating ample
+            fruits and vegetables. Additionally, strive for regular physical activity, ideally about 30 minutes daily for five days a week.
           </p>
         </div>
       </section>
@@ -89,8 +89,8 @@ export default function Home() {
               <h3 className="text-lg font-semibold text-blue-800">Gender</h3>
             </div>
             <p className="text-gray-500">
-              The development and body fat composition of girls adn boys vary with age. Consequently, a child’s age and gender are considered when evaluating
-              their BMI.
+              The development and body fat composition of girls adn boys vary with age. Consequently, a child&#x2019;s age and gender are considered when
+              evaluating their BMI.
             </p>
           </div>
           <div className="rounded-2.5xl p-5 shadow-card">
@@ -105,7 +105,9 @@ export default function Home() {
               <Image src="/images/muscle.svg" alt="" width={32} height={32} aria-hidden="true" />
               <h3 className="text-lg font-semibold text-blue-800">Muscle</h3>
             </div>
-            <p className="text-gray-500">BMI may misclassify muscular individuals as overweight or obese, as it doesn’t differentiate muscle from fat.</p>
+            <p className="text-gray-500">
+              BMI may misclassify muscular individuals as overweight or obese, as it doesn&#x2019;t differentiate muscle from fat.
+            </p>
           </div>
           <div className="rounded-2.5xl p-5 shadow-card">
             <div className="mb-4 flex items-center gap-3.5">

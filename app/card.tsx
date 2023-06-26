@@ -1,28 +1,58 @@
 'use client';
-import { ChangeEvent, ChangeEventHandler } from 'react';
-import { useState } from 'react';
+import { ChangeEvent, ChangeEventHandler, forwardRef, useEffect, useRef, useState } from 'react';
 
 function calculateBMI(height: number, weight: number) {
   if (height === 0 || weight === 0) {
     return 0;
   }
-  return (weight / (height / 100) ** 2).toFixed(2);
+  return (weight / (height / 100) ** 2).toFixed(1);
 }
 
 function imperialToMetric(feet: number, inches: number, pounds: number) {
-  const cm = +((feet * 12 + inches) * 2.54).toFixed(1);
-  const kg = +(pounds / 2.2046).toFixed(1);
+  const cm = +(feet * 12 + inches) * 2.54;
+  const kg = +pounds / 2.2046;
   return [cm, kg];
+}
+
+function getWeightRange(bmi: number, meters: number) {
+  let minBMI = 0;
+  let maxBMI = 0;
+
+  if (bmi < 16) {
+    minBMI = 16;
+  } else if (bmi < 17) {
+    minBMI = 16;
+    maxBMI = 17;
+  } else if (bmi < 18.5) {
+    minBMI = 17;
+    maxBMI = 18.5;
+  } else if (bmi < 25) {
+    minBMI = 18.5;
+    maxBMI = 25;
+  } else if (bmi < 30) {
+    minBMI = 25;
+    maxBMI = 30;
+  } else if (bmi < 35) {
+    minBMI = 35;
+    maxBMI = 40;
+  } else {
+    minBMI = 40;
+  }
+
+  return [minBMI * meters ** 2, maxBMI === 0 ? 0 : maxBMI * meters ** 2];
 }
 
 export default function Card() {
   const [isMetric, setIsMetric] = useState(true);
   const [bmi, setBMI] = useState(0);
+  const [weightRange, setWeightRange] = useState([0, 0]);
 
   function handleMeasurementChange() {
     setIsMetric(!isMetric);
     setBMI(0);
   }
+
+  console.log(weightRange);
 
   return (
     <div className="absolute top-full flex flex-col gap-6 rounded-2.5xl bg-white p-6 shadow-card">
@@ -56,12 +86,14 @@ export default function Card() {
           </label>
         </div>
       </div>
-      <div className="flex flex-col gap-4.5">{isMetric ? <MetricInputs setBMI={setBMI} /> : <ImperialInputs setBMI={setBMI} />}</div>
+      <div className="flex flex-col gap-4.5">
+        {isMetric ? <MetricInputs setBMI={setBMI} setWeightRange={setWeightRange} /> : <ImperialInputs setBMI={setBMI} setWeightRange={setWeightRange} />}
+      </div>
       <div className="flex flex-col gap-4 rounded-2xl bg-linear-gradient-blue-500 p-6">
         {bmi === 0 ? (
           <>
             <h3 className="text-xl font-semibold text-white">Welcome!</h3>
-            <p className="text-white">Enter your height and weight and you’ll see your BMI result here</p>
+            <p className="text-white">Enter your height and weight and you&#x2019;ll see your BMI result here</p>
           </>
         ) : (
           <>
@@ -70,7 +102,7 @@ export default function Card() {
               <span className="text-5xl font-semibold text-white">{bmi}</span>
             </div>
             <p className="text-white">
-              Your BMI suggests you’re a healthy weight. Your ideal weight is between <span className="font-semibold">63kgs - 85kgs</span>.
+              Your BMI suggests you&#x2019;re a healthy weight. Your ideal weight is between <span className="font-semibold">63kgs - 85kgs</span>.
             </p>
           </>
         )}
@@ -79,7 +111,7 @@ export default function Card() {
   );
 }
 
-function MetricInputs({ setBMI }: { setBMI: Function }) {
+function MetricInputs({ setBMI, setWeightRange }: { setBMI: Function; setWeightRange: Function }) {
   const [centimeters, setCentimeters] = useState('');
   const [kilograms, setKilograms] = useState('');
 
@@ -96,7 +128,9 @@ function MetricInputs({ setBMI }: { setBMI: Function }) {
       nextKilograms = target.value;
       setKilograms(nextKilograms);
     }
-    setBMI(calculateBMI(+nextCentimeters, +nextKilograms));
+    const bmi = calculateBMI(+nextCentimeters, +nextKilograms);
+    setBMI(bmi);
+    setWeightRange(getWeightRange(+bmi, +nextCentimeters / 100));
   }
 
   return (
@@ -121,7 +155,7 @@ function MetricInputs({ setBMI }: { setBMI: Function }) {
   );
 }
 
-function ImperialInputs({ setBMI }: { setBMI: Function }) {
+function ImperialInputs({ setBMI, setWeightRange }: { setBMI: Function; setWeightRange: Function }) {
   const [feet, setFeet] = useState('');
   const [inches, setInches] = useState('');
   const [pounds, setPounds] = useState('');
@@ -144,7 +178,9 @@ function ImperialInputs({ setBMI }: { setBMI: Function }) {
       setPounds(nextPounds);
     }
     const [cm, kg] = imperialToMetric(+nextFeet, +nextInches, +nextPounds);
-    setBMI(calculateBMI(cm, kg));
+    const bmi = calculateBMI(cm, kg);
+    setBMI(bmi);
+    setWeightRange(getWeightRange(+bmi, cm / 100));
   }
 
   return (
