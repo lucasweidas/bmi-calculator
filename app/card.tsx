@@ -1,5 +1,5 @@
 'use client';
-import { ChangeEvent, ChangeEventHandler, forwardRef, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, ChangeEventHandler, useState } from 'react';
 
 function calculateBMI(height: number, weight: number) {
   if (height === 0 || weight === 0) {
@@ -14,7 +14,11 @@ function imperialToMetric(feet: number, inches: number, pounds: number) {
   return [cm, kg];
 }
 
-function getWeightRange(bmi: number, meters: number) {
+function kgsTolbs(kg: number) {
+  return kg / 0.45359237;
+}
+
+function getWeightRange(isMetric: boolean, bmi: number, meters: number) {
   let minBMI = 0;
   let maxBMI = 0;
 
@@ -39,7 +43,11 @@ function getWeightRange(bmi: number, meters: number) {
     minBMI = 40;
   }
 
-  return [minBMI * meters ** 2, maxBMI === 0 ? 0 : maxBMI * meters ** 2];
+  const minKilograms = minBMI * meters ** 2;
+  const maxKilograms = maxBMI * meters ** 2;
+  const minWeight = isMetric ? minKilograms : kgsTolbs(minKilograms);
+  const maxWeight = isMetric ? maxKilograms : kgsTolbs(maxKilograms);
+  return [+minWeight.toFixed(1), maxBMI ? +maxWeight.toFixed(1) : 0];
 }
 
 export default function Card() {
@@ -52,42 +60,25 @@ export default function Card() {
     setBMI(0);
   }
 
-  console.log(weightRange);
+  console.log(isMetric, weightRange);
 
   return (
     <div className="absolute top-full flex flex-col gap-6 rounded-2.5xl bg-white p-6 shadow-card">
       <h2 className="text-xl font-semibold text-blue-900">Enter your details below</h2>
       <div className="flex flex-wrap justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <input
-            className="relative flex h-8 w-8 cursor-pointer appearance-none items-center justify-center rounded-full outline-none ring-1 ring-gray-200 before:h-3.5 before:w-3.5 before:rounded-full before:bg-blue-500 before:opacity-0 focus-visible:ring-2 focus-visible:ring-blue-500 aria-checked:bg-indigo-50 aria-checked:ring-indigo-50 aria-checked:before:opacity-100"
-            type="radio"
-            name="measurement"
-            id="metric"
-            onChange={handleMeasurementChange}
-            defaultChecked={true}
-            aria-checked={isMetric}
-          />
-          <label className="cursor-pointer font-medium text-blue-900" htmlFor="metric">
-            Metric
-          </label>
-        </div>
-        <div className="flex items-center gap-4">
-          <input
-            className="relative flex h-8 w-8 cursor-pointer appearance-none items-center justify-center rounded-full outline-none ring-1 ring-gray-200 before:h-3.5 before:w-3.5 before:rounded-full before:bg-blue-500 before:opacity-0 focus-visible:ring-2 focus-visible:ring-blue-500 aria-checked:bg-indigo-50 aria-checked:ring-indigo-50 aria-checked:before:opacity-100"
-            type="radio"
-            name="measurement"
-            id="imperial"
-            onChange={handleMeasurementChange}
-            aria-checked={!isMetric}
-          />
-          <label className="cursor-pointer font-medium text-blue-900" htmlFor="imperial">
-            Imperial
-          </label>
-        </div>
+        <RadioInput id="metric" name="measurement" checked={isMetric} onChange={handleMeasurementChange} defaultChecked={true}>
+          Metric
+        </RadioInput>
+        <RadioInput id="imperial" name="measurement" checked={!isMetric} onChange={handleMeasurementChange}>
+          Imperial
+        </RadioInput>
       </div>
       <div className="flex flex-col gap-4.5">
-        {isMetric ? <MetricInputs setBMI={setBMI} setWeightRange={setWeightRange} /> : <ImperialInputs setBMI={setBMI} setWeightRange={setWeightRange} />}
+        {isMetric ? (
+          <MetricInputs isMetric={isMetric} setBMI={setBMI} setWeightRange={setWeightRange} />
+        ) : (
+          <ImperialInputs isMetric={isMetric} setBMI={setBMI} setWeightRange={setWeightRange} />
+        )}
       </div>
       <div className="flex flex-col gap-4 rounded-2xl bg-linear-gradient-blue-500 p-6">
         {bmi === 0 ? (
@@ -102,7 +93,8 @@ export default function Card() {
               <span className="text-5xl font-semibold text-white">{bmi}</span>
             </div>
             <p className="text-white">
-              Your BMI suggests you&#x2019;re a healthy weight. Your ideal weight is between <span className="font-semibold">63kgs - 85kgs</span>.
+              Your BMI suggests you&#x2019;re a healthy weight. Your ideal weight is between{' '}
+              <span className="font-semibold">{`${weightRange[0]}${isMetric ? 'kgs' : 'lbs'} - ${weightRange[1]}${isMetric ? 'kgs' : 'lbs'}`}</span>.
             </p>
           </>
         )}
@@ -111,7 +103,39 @@ export default function Card() {
   );
 }
 
-function MetricInputs({ setBMI, setWeightRange }: { setBMI: Function; setWeightRange: Function }) {
+interface RadioInput {
+  children: string;
+  id: string;
+  name: string;
+  checked: boolean;
+  onChange: ChangeEventHandler;
+  defaultChecked?: boolean;
+}
+function RadioInput({ children, id, name, checked, onChange, defaultChecked = false }: RadioInput) {
+  return (
+    <div className="flex items-center gap-4">
+      <input
+        className="relative flex h-8 w-8 cursor-pointer appearance-none items-center justify-center rounded-full outline-none ring-1 ring-gray-200 before:h-3.5 before:w-3.5 before:rounded-full before:bg-blue-500 before:opacity-0 focus-visible:ring-2 focus-visible:ring-blue-500 aria-checked:bg-indigo-50 aria-checked:ring-indigo-50 aria-checked:before:opacity-100"
+        type="radio"
+        name={name}
+        id={id}
+        onChange={onChange}
+        defaultChecked={defaultChecked}
+        aria-checked={checked}
+      />
+      <label className="cursor-pointer font-medium text-blue-900" htmlFor={id}>
+        {children}
+      </label>
+    </div>
+  );
+}
+
+interface HeightWeightInputs {
+  isMetric: boolean;
+  setBMI: Function;
+  setWeightRange: Function;
+}
+function MetricInputs({ isMetric, setBMI, setWeightRange }: HeightWeightInputs) {
   const [centimeters, setCentimeters] = useState('');
   const [kilograms, setKilograms] = useState('');
 
@@ -130,7 +154,7 @@ function MetricInputs({ setBMI, setWeightRange }: { setBMI: Function; setWeightR
     }
     const bmi = calculateBMI(+nextCentimeters, +nextKilograms);
     setBMI(bmi);
-    setWeightRange(getWeightRange(+bmi, +nextCentimeters / 100));
+    setWeightRange(getWeightRange(isMetric, +bmi, +nextCentimeters / 100));
   }
 
   return (
@@ -155,7 +179,7 @@ function MetricInputs({ setBMI, setWeightRange }: { setBMI: Function; setWeightR
   );
 }
 
-function ImperialInputs({ setBMI, setWeightRange }: { setBMI: Function; setWeightRange: Function }) {
+function ImperialInputs({ isMetric, setBMI, setWeightRange }: HeightWeightInputs) {
   const [feet, setFeet] = useState('');
   const [inches, setInches] = useState('');
   const [pounds, setPounds] = useState('');
@@ -179,8 +203,9 @@ function ImperialInputs({ setBMI, setWeightRange }: { setBMI: Function; setWeigh
     }
     const [cm, kg] = imperialToMetric(+nextFeet, +nextInches, +nextPounds);
     const bmi = calculateBMI(cm, kg);
+    const meters = cm / 100;
     setBMI(bmi);
-    setWeightRange(getWeightRange(+bmi, cm / 100));
+    setWeightRange(getWeightRange(isMetric, +bmi, meters));
   }
 
   return (
