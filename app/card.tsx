@@ -1,54 +1,7 @@
 'use client';
-import { ChangeEvent, ChangeEventHandler, useState } from 'react';
-
-function calculateBMI(height: number, weight: number) {
-  if (height === 0 || weight === 0) {
-    return 0;
-  }
-  return (weight / (height / 100) ** 2).toFixed(1);
-}
-
-function imperialToMetric(feet: number, inches: number, pounds: number) {
-  const cm = +(feet * 12 + inches) * 2.54;
-  const kg = +pounds / 2.2046;
-  return [cm, kg];
-}
-
-function kgsTolbs(kg: number) {
-  return kg / 0.45359237;
-}
-
-function getWeightRange(isMetric: boolean, bmi: number, meters: number) {
-  let minBMI = 0;
-  let maxBMI = 0;
-
-  if (bmi < 16) {
-    minBMI = 16;
-  } else if (bmi < 17) {
-    minBMI = 16;
-    maxBMI = 17;
-  } else if (bmi < 18.5) {
-    minBMI = 17;
-    maxBMI = 18.5;
-  } else if (bmi < 25) {
-    minBMI = 18.5;
-    maxBMI = 25;
-  } else if (bmi < 30) {
-    minBMI = 25;
-    maxBMI = 30;
-  } else if (bmi < 35) {
-    minBMI = 35;
-    maxBMI = 40;
-  } else {
-    minBMI = 40;
-  }
-
-  const minKilograms = minBMI * meters ** 2;
-  const maxKilograms = maxBMI * meters ** 2;
-  const minWeight = isMetric ? minKilograms : kgsTolbs(minKilograms);
-  const maxWeight = isMetric ? maxKilograms : kgsTolbs(maxKilograms);
-  return [+minWeight.toFixed(1), maxBMI ? +maxWeight.toFixed(1) : 0];
-}
+import { ChangeEvent, useState } from 'react';
+import { HeightWeightInputs, RadioInput, TextInput } from '@/interfaces';
+import { calculateBMI, getWeightRange, imperialToMetric } from '@/lib/bmi';
 
 export default function Card() {
   const [isMetric, setIsMetric] = useState(true);
@@ -59,8 +12,6 @@ export default function Card() {
     setIsMetric(!isMetric);
     setBMI(0);
   }
-
-  console.log(isMetric, weightRange);
 
   return (
     <div className="absolute top-full flex flex-col gap-6 rounded-2.5xl bg-white p-6 shadow-card">
@@ -103,14 +54,6 @@ export default function Card() {
   );
 }
 
-interface RadioInput {
-  children: string;
-  id: string;
-  name: string;
-  checked: boolean;
-  onChange: ChangeEventHandler;
-  defaultChecked?: boolean;
-}
 function RadioInput({ children, id, name, checked, onChange, defaultChecked = false }: RadioInput) {
   return (
     <div className="flex items-center gap-4">
@@ -130,11 +73,6 @@ function RadioInput({ children, id, name, checked, onChange, defaultChecked = fa
   );
 }
 
-interface HeightWeightInputs {
-  isMetric: boolean;
-  setBMI: Function;
-  setWeightRange: Function;
-}
 function MetricInputs({ isMetric, setBMI, setWeightRange }: HeightWeightInputs) {
   const [centimeters, setCentimeters] = useState('');
   const [kilograms, setKilograms] = useState('');
@@ -233,13 +171,6 @@ function ImperialInputs({ isMetric, setBMI, setWeightRange }: HeightWeightInputs
   );
 }
 
-interface TextInput {
-  children: string;
-  id: string;
-  placeholder: string;
-  value: string;
-  onChange: ChangeEventHandler;
-}
 function TextInput({ children, id, placeholder, value, onChange }: TextInput) {
   return (
     <div className="relative flex items-center">
@@ -251,7 +182,7 @@ function TextInput({ children, id, placeholder, value, onChange }: TextInput) {
         value={value}
         onChange={onChange}
       />
-      <span className="absolute right-6 text-xl font-semibold text-blue-500">{children}</span>
+      <span className="pointer-events-none absolute right-6 text-xl font-semibold text-blue-500">{children}</span>
     </div>
   );
 }
