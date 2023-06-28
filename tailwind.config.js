@@ -69,6 +69,10 @@ module.exports = {
       boxShadow: {
         card: '8px 12px 24px 6px hsla(227, 55%, 51%, 0.08)',
       },
+      width: {
+        'card-lg': 'min(100% - 2.50rem, 43rem)',
+        'card-md': 'min(100%, 35.25rem)',
+      },
     },
   },
   plugins: [],

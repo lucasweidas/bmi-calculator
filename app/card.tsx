@@ -1,12 +1,12 @@
 'use client';
 import { ChangeEvent, useState } from 'react';
-import { HeightWeightInputs, RadioInput, TextInput } from '@/interfaces';
+import { HeightWeightInputs, RadioInput, TextInput, WeightRange } from '@/interfaces';
 import { calculateBMI, getWeightRange, imperialToMetric } from '@/lib/bmi';
 
 export default function Card() {
   const [isMetric, setIsMetric] = useState(true);
   const [bmi, setBMI] = useState(0);
-  const [weightRange, setWeightRange] = useState([0, 0]);
+  const [weightRange, setWeightRange] = useState<WeightRange>({ category: '', minWeight: 0, maxWeight: 0 });
 
   function handleMeasurementChange() {
     setIsMetric(!isMetric);
@@ -14,7 +14,7 @@ export default function Card() {
   }
 
   return (
-    <div className="absolute top-full flex flex-col gap-6 rounded-2.5xl bg-white p-6 shadow-card">
+    <div className="relative bottom-44 flex w-card-lg flex-col gap-6 rounded-2.5xl bg-white p-6 shadow-card">
       <h2 className="text-xl font-semibold text-blue-900">Enter your details below</h2>
       <div className="flex flex-wrap justify-between gap-4">
         <RadioInput id="metric" name="measurement" checked={isMetric} onChange={handleMeasurementChange} defaultChecked={true}>
@@ -44,8 +44,11 @@ export default function Card() {
               <span className="text-5xl font-semibold text-white">{bmi}</span>
             </div>
             <p className="text-white">
-              Your BMI suggests you&#x2019;re a healthy weight. Your ideal weight is between{' '}
-              <span className="font-semibold">{`${weightRange[0]}${isMetric ? 'kgs' : 'lbs'} - ${weightRange[1]}${isMetric ? 'kgs' : 'lbs'}`}</span>.
+              Your BMI suggests you&#x2019;re {weightRange.category}. Your ideal weight is between{' '}
+              <span className="font-semibold">{`${weightRange.minWeight}${isMetric ? 'kgs' : 'lbs'} - ${weightRange.maxWeight}${
+                isMetric ? 'kgs' : 'lbs'
+              }`}</span>
+              .
             </p>
           </>
         )}

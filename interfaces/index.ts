@@ -22,3 +22,9 @@ export interface RadioInput {
   onChange: ChangeEventHandler;
   defaultChecked?: boolean;
 }
+
+export interface WeightRange {
+  category: string;
+  minWeight: number;
+  maxWeight: number;
+}

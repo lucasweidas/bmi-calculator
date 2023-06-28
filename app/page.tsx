@@ -4,21 +4,19 @@ import Card from './card';
 export default function Home() {
   return (
     <main>
-      <section className="rounded-b-5xl bg-linear-gradient-blue-200 px-6 pb-52">
-        <div className="relative flex flex-col items-center">
-          <div className="flex flex-col items-center gap-6 pb-10 pt-8">
-            <Image src="/images/logo.svg" alt="" width={60} height={60} className="h-10 w-10" aria-hidden="true" />
-            <h1 className="text-center text-5xl font-semibold leading-tight text-blue-800">Body Mass Index Calculator</h1>
-            <p className="text-center text-gray-500">
-              Better understand your weight in relation to your height using our body mass index (BM) calculator. While BMI is not the sole determinant of a
-              healthy weight, it offers a valuable starting point to evaluate your overall health and well-being.
-            </p>
-          </div>
-          <Card />
+      <section className="flex flex-col items-center">
+        <div className="flex flex-col items-center gap-6 rounded-b-5xl bg-linear-gradient-blue-200 px-5 pb-[208px] pt-8">
+          <Image src="/images/logo.svg" alt="" width={60} height={60} className="h-10 w-10" aria-hidden="true" />
+          <h1 className="text-center text-5xl font-semibold leading-tight text-blue-800">Body Mass Index Calculator</h1>
+          <p className="text-center text-gray-500">
+            Better understand your weight in relation to your height using our body mass index (BM) calculator. While BMI is not the sole determinant of a
+            healthy weight, it offers a valuable starting point to evaluate your overall health and well-being.
+          </p>
         </div>
+        <Card />
       </section>
 
-      <section className="mt-[34rem]">
+      <section className="mt-4">
         <div className="relative flex aspect-video justify-center rounded-4xl bg-sky-50">
           <Image
             src="/images/person-eating.png"
