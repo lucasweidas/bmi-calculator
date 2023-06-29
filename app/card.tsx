@@ -41,13 +41,21 @@ export default function Card() {
           <>
             <div>
               <h3 className="mb-2 font-semibold text-white">Your BMI is...</h3>
-              <span className="text-5xl font-semibold text-white">{bmi}</span>
+              <span className="block truncate text-5xl font-semibold text-white">{bmi}</span>
             </div>
             <p className="text-white">
               Your BMI suggests you&#x2019;re <span className="font-semibold">{weightRange.category}</span>. Your ideal weight is between{' '}
-              <span className="font-semibold">{`${weightRange.minWeight}${isMetric ? 'kgs' : 'lbs'} - ${weightRange.maxWeight}${
-                isMetric ? 'kgs' : 'lbs'
-              }`}</span>
+              <span className="font-semibold">
+                <span className="inline-grid grid-cols-[repeat(2,auto)]">
+                  <span className="block truncate">{weightRange.minWeight}</span>
+                  {isMetric ? 'kgs' : 'lbs'}
+                </span>
+                {' - '}
+                <span className="inline-grid grid-cols-[repeat(2,auto)]">
+                  <span className="block truncate">{weightRange.maxWeight}</span>
+                  {isMetric ? 'kgs' : 'lbs'}
+                </span>
+              </span>
               .
             </p>
           </>
@@ -61,7 +69,7 @@ function RadioInput({ children, id, name, checked, onChange, defaultChecked = fa
   return (
     <div className="flex items-center gap-4">
       <input
-        className="relative flex h-8 w-8 cursor-pointer appearance-none items-center justify-center rounded-full outline-none ring-1 ring-gray-200 before:h-3.5 before:w-3.5 before:rounded-full before:bg-blue-500 before:opacity-0 focus-visible:ring-2 focus-visible:ring-blue-500 aria-checked:bg-indigo-50 aria-checked:ring-indigo-50 aria-checked:before:opacity-100"
+        className="relative flex h-8 w-8 cursor-pointer appearance-none items-center justify-center rounded-full outline-none ring-1 ring-gray-200 before:h-3.5 before:w-3.5 before:rounded-full before:bg-blue-500 before:opacity-0 focus-visible:ring-2 focus-visible:ring-blue-500 aria-checked:bg-indigo-50 aria-checked:ring-indigo-50 aria-checked:before:opacity-100 focus-visible:aria-checked:ring-blue-500"
         type="radio"
         name={name}
         id={id}
@@ -178,7 +186,7 @@ function TextInput({ children, id, placeholder, value, onChange }: TextInput) {
   return (
     <div className="relative flex items-center">
       <input
-        className="w-full rounded-xl px-6 py-4 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
+        className="w-full rounded-xl py-4 pl-6 pr-16 text-xl font-semibold text-blue-900 outline-none ring-1 ring-gray-200 placeholder:text-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500"
         type="text"
         id={id}
         placeholder={placeholder}
