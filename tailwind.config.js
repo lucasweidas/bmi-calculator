@@ -9,6 +9,9 @@ module.exports = {
       fontSize: {
         '2lg': '1.375rem',
       },
+      lineHeight: {
+        tiny: 1.125,
+      },
       colors: {
         gray: {
           200: 'hsl(0, 0%, 87%)',
@@ -72,6 +75,9 @@ module.exports = {
       width: {
         'card-lg': 'min(100% - 2.50rem, 43rem)',
         'card-md': 'min(100%, 35.25rem)',
+      },
+      screens: {
+        mobile: '375px',
       },
     },
   },
