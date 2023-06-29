@@ -44,7 +44,7 @@ export default function Card() {
               <span className="text-5xl font-semibold text-white">{bmi}</span>
             </div>
             <p className="text-white">
-              Your BMI suggests you&#x2019;re {weightRange.category}. Your ideal weight is between{' '}
+              Your BMI suggests you&#x2019;re <span className="font-semibold">{weightRange.category}</span>. Your ideal weight is between{' '}
               <span className="font-semibold">{`${weightRange.minWeight}${isMetric ? 'kgs' : 'lbs'} - ${weightRange.maxWeight}${
                 isMetric ? 'kgs' : 'lbs'
               }`}</span>
