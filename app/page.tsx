@@ -5,10 +5,10 @@ export default function Home() {
   return (
     <main>
       <section className="flex flex-col items-center">
-        <div className="flex flex-col items-center gap-6 rounded-b-5xl bg-linear-gradient-blue-200 px-5 pb-52 pt-8">
+        <div className="flex w-full flex-col items-center gap-6 rounded-b-5xl bg-linear-gradient-blue-200 px-5 pb-52 pt-8 md:px-12 md:pb-74">
           <Image src="/images/logo.svg" alt="" width={60} height={60} className="h-10 w-10" aria-hidden="true" />
-          <h1 className="text-center text-4xl font-semibold !leading-tiny text-blue-800 mobile:text-5xl">Body Mass Index Calculator</h1>
-          <p className="text-center text-gray-500">
+          <h1 className="max-w-sm text-center text-4xl font-semibold !leading-tiny text-blue-800 mobile:text-5xl">Body Mass Index Calculator</h1>
+          <p className="max-w-2xl text-center text-gray-500">
             Better understand your weight in relation to your height using our body mass index (BM) calculator. While BMI is not the sole determinant of a
             healthy weight, it offers a valuable starting point to evaluate your overall health and well-being.
           </p>
