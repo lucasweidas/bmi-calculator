@@ -31,7 +31,7 @@ export default function Card() {
           <ImperialInputs isMetric={isMetric} setBMI={setBMI} setWeightRange={setWeightRange} />
         )}
       </div>
-      <div className="rounded-2xl bg-linear-gradient-blue-500 p-6 md:rounded-r-9xl md:rounded-s-lg md:p-8">
+      <div className="rounded-2xl bg-linear-gradient-blue-500 p-6 md:rounded-l-lg md:rounded-r-12xl md:p-8">
         {bmi === 0 ? (
           <>
             <h3 className="mb-4 text-xl font-semibold text-white md:text-2xl">Welcome!</h3>

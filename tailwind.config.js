@@ -56,7 +56,7 @@ module.exports = {
         '2.5xl': '1.25rem',
         '4xl': '2rem',
         '5xl': '2.5rem',
-        '9xl': '4.5rem',
+        '12xl': '6rem',
       },
       gap: {
         4.5: '1.125rem',
