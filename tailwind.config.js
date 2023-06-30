@@ -65,6 +65,9 @@ module.exports = {
         12.5: '3.25rem',
         74: '19rem',
       },
+      margin: {
+        17: '4.5rem',
+      },
       backgroundImage: {
         'linear-gradient-blue-50': 'linear-gradient(135deg, hsla(220, 82%, 98%, 0.2) 0%, hsla(220, 82%, 98%, 0.5) 52.21%, hsl(220, 82%, 98%) 100%)',
         'linear-gradient-blue-200':

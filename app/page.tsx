@@ -71,55 +71,55 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="mt-14 px-5">
-          <div className="mb-14">
-            <h2 className="mb-7 text-center text-3xl font-semibold text-blue-800">Limitations of BMI</h2>
+        <section className="mt-14 px-5 md:mx-auto md:mt-20 md:max-w-3xl md:px-10">
+          <div className="mb-14 md:mx-auto md:mb-17 md:max-w-[40rem]">
+            <h2 className="mb-7 text-center text-3xl font-semibold text-blue-800 md:mb-6">Limitations of BMI</h2>
             <p className="text-center text-gray-500">
               Although BMI is often a practical indicator of healthy weight, it is not suited for every person. Specific groups should carefully consider their
               BMI outcomes, and in certain cases, the isMetric may not be beneficial to use.
             </p>
           </div>
-          <div className="flex flex-col gap-4">
-            <div className="rounded-2.5xl p-5 shadow-card">
-              <div className="mb-4 flex items-center gap-3.5">
+          <div className="grid gap-4 md:grid-cols-4">
+            <div className="rounded-2.5xl p-5 shadow-card md:col-span-2 md:p-8">
+              <div className="mb-4 flex items-center gap-3.5 md:gap-4">
                 <Image src="/images/gender.svg" alt="" width={32} height={32} aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-blue-800">Gender</h3>
+                <h3 className="text-lg font-semibold text-blue-800 md:text-xl">Gender</h3>
               </div>
               <p className="text-gray-500">
                 The development and body fat composition of girls adn boys vary with age. Consequently, a child&#x2019;s age and gender are considered when
                 evaluating their BMI.
               </p>
             </div>
-            <div className="rounded-2.5xl p-5 shadow-card">
-              <div className="mb-4 flex items-center gap-3.5">
+            <div className="rounded-2.5xl p-5 shadow-card md:col-span-2 md:p-8">
+              <div className="mb-4 flex items-center gap-3.5 md:gap-4">
                 <Image src="/images/cake.svg" alt="" width={32} height={32} aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-blue-800">Age</h3>
+                <h3 className="text-lg font-semibold text-blue-800 md:text-xl">Age</h3>
               </div>
               <p className="text-gray-500">In aging individuals, increased body fat and muscle loss may cause BMI to underestimate body fat content.</p>
             </div>
-            <div className="rounded-2.5xl p-5 shadow-card">
-              <div className="mb-4 flex items-center gap-3.5">
+            <div className="rounded-2.5xl p-5 shadow-card md:col-span-2 md:p-8">
+              <div className="mb-4 flex items-center gap-3.5 md:gap-4">
                 <Image src="/images/muscle.svg" alt="" width={32} height={32} aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-blue-800">Muscle</h3>
+                <h3 className="text-lg font-semibold text-blue-800 md:text-xl">Muscle</h3>
               </div>
               <p className="text-gray-500">
                 BMI may misclassify muscular individuals as overweight or obese, as it doesn&#x2019;t differentiate muscle from fat.
               </p>
             </div>
-            <div className="rounded-2.5xl p-5 shadow-card">
-              <div className="mb-4 flex items-center gap-3.5">
+            <div className="rounded-2.5xl p-5 shadow-card md:col-span-2 md:p-8">
+              <div className="mb-4 flex items-center gap-3.5 md:gap-4">
                 <Image src="/images/baby.svg" alt="" width={32} height={32} aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-blue-800">Pregnancy</h3>
+                <h3 className="text-lg font-semibold text-blue-800 md:text-xl">Pregnancy</h3>
               </div>
               <p className="text-gray-500">
                 Expectant mothers experience weight gain due to their growing baby. Maintaining a healthy pre-pregnancy BMI is advisable to minimise health
                 risks for both mother and child.
               </p>
             </div>
-            <div className="rounded-2.5xl p-5 shadow-card">
-              <div className="mb-4 flex items-center gap-3.5">
+            <div className="rounded-2.5xl p-5 shadow-card md:col-start-2 md:col-end-4 md:p-8">
+              <div className="mb-4 flex items-center gap-3.5 md:gap-4">
                 <Image src="/images/person.svg" alt="" width={32} height={32} aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-blue-800">Race</h3>
+                <h3 className="text-lg font-semibold text-blue-800 md:text-xl">Race</h3>
               </div>
               <p className="text-gray-500">
                 Certain health concerns may affect individuals of some Black and Asian origins at lower BMIs than others. To learn more, it is advised to
