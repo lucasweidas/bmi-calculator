@@ -7,7 +7,7 @@ module.exports = {
         sans: ['var(--font-inter)'],
       },
       fontSize: {
-        '2lg': '1.375rem',
+        '1.5xl': '1.375rem',
       },
       lineHeight: {
         tiny: 1.125,
