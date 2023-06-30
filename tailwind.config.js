@@ -77,6 +77,7 @@ module.exports = {
       width: {
         'card-lg': 'min(100% - 2.50rem, 43rem)',
         'card-md': 'min(100%, 35.25rem)',
+        82: '21rem',
       },
       screens: {
         mobile: '375px',

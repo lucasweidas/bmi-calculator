@@ -16,13 +16,20 @@ export default function Home() {
         <Card />
       </section>
 
-      <div className="relative bottom-20">
-        <section>
-          <div className="relative isolate flex justify-center">
-            <Image src="/images/person-eating.png" alt="A person eating asian food" width={311} height={333} className="w-[min(100%-4rem,25rem)]" priority />
-            <div className="absolute bottom-0 left-0 -z-10 aspect-video max-h-80 w-full rounded-4xl bg-sky-50" aria-hidden="true"></div>
+      <div className="relative bottom-20 md:bottom-28">
+        <section className="flex flex-col gap-10 md:mx-auto md:max-w-3xl md:flex-row md:justify-between">
+          <div className="relative isolate flex justify-center overflow-hidden rounded-4xl md:-left-6 md:w-80">
+            <Image
+              src="/images/person-eating.png"
+              alt="A person eating asian food"
+              width={311}
+              height={333}
+              className="w-[min(100%-4rem,25rem)] md:relative md:-left-4 md:w-80"
+              priority
+            />
+            <div className="absolute bottom-0 left-0 -z-10 aspect-video max-h-80 w-full rounded-4xl bg-sky-50 md:aspect-[1.2/1]" aria-hidden="true"></div>
           </div>
-          <div className="px-5 pt-10">
+          <div className="px-5 md:mr-10 md:w-82 md:px-0">
             <h2 className="mb-6 text-3xl font-semibold text-blue-800">What your BMI result means</h2>
             <p className="text-gray-500">
               A BMI range of 18.5 to 24.9 is considered a &#x2018;healthy weight&#x2019;. Maintaining a healthy weight may lower your changes of experiencing
