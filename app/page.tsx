@@ -20,21 +20,24 @@ export default function Home() {
         <Card />
       </section>
 
-      <div className="relative bottom-20 md:bottom-28">
-        <section className="flex flex-col gap-10 md:mx-auto md:max-w-3xl md:flex-row md:justify-between">
-          <div className="relative isolate flex justify-center overflow-hidden rounded-4xl md:-left-6 md:w-80">
+      <div className="relative bottom-20 md:bottom-28 xl:bottom-auto xl:mt-24">
+        <section className="flex flex-col gap-10 md:mx-auto md:max-w-3xl md:flex-row md:items-center md:justify-between xl:max-w-[74rem] xl:items-end">
+          <div className="relative isolate flex justify-center overflow-hidden rounded-4xl md:-left-6 md:w-80 xl:left-auto xl:w-[35rem]">
             <Image
               src="/images/person-eating.png"
               alt="A person eating asian food"
               width={311}
               height={333}
-              className="w-[min(100%-4rem,25rem)] md:relative md:-left-4 md:w-80"
+              className="w-[min(100%-4rem,25rem)] md:relative md:-left-4 md:w-80 xl:left-auto xl:w-[30rem]"
               priority
             />
-            <div className="absolute bottom-0 left-0 -z-10 aspect-video max-h-80 w-full rounded-4xl bg-sky-50 md:aspect-[1.2/1]" aria-hidden="true"></div>
+            <div
+              className="absolute bottom-0 left-0 -z-10 aspect-video max-h-80 w-full rounded-4xl bg-sky-50 md:aspect-[1.2/1] xl:max-h-96"
+              aria-hidden="true"
+            ></div>
           </div>
-          <div className="px-5 md:mr-10 md:w-82 md:px-0">
-            <h2 className="mb-6 text-3xl font-semibold text-blue-800">What your BMI result means</h2>
+          <div className="px-5 md:mr-10 md:max-w-[21rem] md:px-0 xl:mr-0 xl:max-w-[29rem] xl:pb-12">
+            <h2 className="mb-6 text-3xl font-semibold text-blue-800 xl:text-4.5xl">What your BMI result means</h2>
             <p className="text-gray-500">
               A BMI range of 18.5 to 24.9 is considered a &#x2018;healthy weight&#x2019;. Maintaining a healthy weight may lower your changes of experiencing
               health issues later on, such as obesity and type 2 diabetes. Aim for a nutritious diet with reduced fat and sugar content, incorporating ample
