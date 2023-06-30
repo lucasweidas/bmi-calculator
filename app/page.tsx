@@ -3,15 +3,19 @@ import Card from './card';
 
 export default function Home() {
   return (
-    <main>
-      <section className="flex flex-col items-center">
-        <div className="flex w-full flex-col items-center gap-6 rounded-b-5xl bg-linear-gradient-blue-200 px-5 pb-52 pt-8 md:px-12 md:pb-74">
-          <Image src="/images/logo.svg" alt="" width={60} height={60} className="h-10 w-10" aria-hidden="true" />
-          <h1 className="max-w-sm text-center text-4xl font-semibold !leading-tiny text-blue-800 mobile:text-5xl">Body Mass Index Calculator</h1>
-          <p className="max-w-2xl text-center text-gray-500">
-            Better understand your weight in relation to your height using our body mass index (BM) calculator. While BMI is not the sole determinant of a
-            healthy weight, it offers a valuable starting point to evaluate your overall health and well-being.
-          </p>
+    <main className="xl:mx-auto xl:max-w-[90rem] xl:px-6">
+      <section className="flex flex-col items-center xl:relative xl:items-start">
+        <div className="flex w-full flex-col items-center gap-6 rounded-b-5xl bg-linear-gradient-blue-200 px-5 pb-52 pt-8 md:px-12 md:pb-74 xl:max-w-4.5xl xl:items-start xl:gap-0 xl:px-16 xl:pb-48 xl:pt-20 desktop:px-28">
+          <Image src="/images/logo.svg" alt="" width={60} height={60} className="h-10 w-10 xl:h-14 xl:w-14" aria-hidden="true" />
+          <div className="flex max-w-2xl flex-col items-center gap-6 text-center xl:max-w-[30rem] xl:items-start xl:gap-12 xl:text-start">
+            <h1 className="text-4xl font-semibold !leading-tiny text-blue-800 max-xl:max-w-sm mobile:text-5xl xl:mt-33 xl:text-6xl">
+              Body Mass Index Calculator
+            </h1>
+            <p className="text-gray-500">
+              Better understand your weight in relation to your height using our body mass index (BM) calculator. While BMI is not the sole determinant of a
+              healthy weight, it offers a valuable starting point to evaluate your overall health and well-being.
+            </p>
+          </div>
         </div>
         <Card />
       </section>

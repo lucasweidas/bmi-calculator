@@ -8,6 +8,7 @@ module.exports = {
       },
       fontSize: {
         '1.5xl': '1.375rem',
+        '6.5xl': ['4rem', '1'],
       },
       lineHeight: {
         tiny: 1.125,
@@ -63,10 +64,12 @@ module.exports = {
       },
       padding: {
         12.5: '3.25rem',
+        33: '8.5rem',
         74: '19rem',
       },
       margin: {
         17: '4.5rem',
+        33: '8.5rem',
       },
       backgroundImage: {
         'linear-gradient-blue-50': 'linear-gradient(135deg, hsla(220, 82%, 98%, 0.2) 0%, hsla(220, 82%, 98%, 0.5) 52.21%, hsl(220, 82%, 98%) 100%)',
@@ -82,8 +85,12 @@ module.exports = {
         'card-md': 'min(100%, 35.25rem)',
         82: '21rem',
       },
+      maxWidth: {
+        '4.5xl': '60rem',
+      },
       screens: {
         mobile: '375px',
+        desktop: '1440px',
       },
     },
   },
