@@ -22,7 +22,7 @@ export default function Home() {
 
       <div className="relative bottom-20 md:bottom-28 xl:bottom-auto xl:mt-24">
         <section className="flex flex-col gap-10 md:mx-auto md:max-w-3xl md:flex-row md:items-center md:justify-between xl:max-w-[74rem] xl:items-end">
-          <div className="relative isolate flex justify-center overflow-hidden rounded-4xl md:-left-6 md:w-80 xl:left-auto xl:w-[35rem]">
+          <div className="relative isolate flex justify-center overflow-hidden rounded-4xl before:absolute before:bottom-0 before:left-0 before:-z-10 before:aspect-video before:max-h-80 before:w-full before:rounded-4xl before:bg-sky-50 md:-left-6 md:w-80 before:md:aspect-[1.2/1] xl:left-auto xl:w-[35rem] before:xl:max-h-96">
             <Image
               src="/images/person-eating.png"
               alt="A person eating asian food"
@@ -31,10 +31,6 @@ export default function Home() {
               className="w-[min(100%-4rem,25rem)] md:relative md:-left-4 md:w-80 xl:left-auto xl:w-[30rem]"
               priority
             />
-            <div
-              className="absolute bottom-0 left-0 -z-10 aspect-video max-h-80 w-full rounded-4xl bg-sky-50 md:aspect-[1.2/1] xl:max-h-96"
-              aria-hidden="true"
-            ></div>
           </div>
           <div className="px-5 md:mr-10 md:max-w-[21rem] md:px-0 xl:mr-0 xl:max-w-[29rem] xl:pb-12">
             <h2 className="mb-6 text-3xl font-semibold text-blue-800 xl:text-4.5xl">What your BMI result means</h2>
