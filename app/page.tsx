@@ -52,36 +52,36 @@ export default function Home() {
             </p>
           </div>
         </section>
-        <section className="mt-16 bg-linear-gradient-blue-50 md:mt-24">
-          <div className="flex flex-col gap-10 px-5 py-12.5 md:mx-auto md:max-w-3xl md:px-10 md:py-16">
-            <div className="flex flex-col gap-5 md:flex-row md:items-center md:gap-10">
+        <section className="mt-16 bg-linear-gradient-blue-50 md:mt-24 xl:rounded-4xl">
+          <div className="grid gap-10 px-5 py-12.5 md:mx-auto md:max-w-3xl md:px-10 md:py-16 xl:max-w-none xl:grid-cols-3 xl:gap-9 xl:px-28 xl:py-17">
+            <div className="flex flex-col gap-5 md:items-center md:gap-10 md:max-xl:flex-row xl:items-start xl:gap-11">
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-pink-100 md:flex-none">
                 <Image src="/images/bowl.svg" alt="" width={26} height={32} aria-hidden="true" />
               </div>
               <div>
-                <h3 className="mb-5 text-1.5xl font-semibold text-blue-800 md:text-2xl">Healthy eating</h3>
+                <h3 className="mb-5 text-1.5xl font-semibold text-blue-800 md:text-2xl xl:mb-6">Healthy eating</h3>
                 <p className="text-gray-500">
                   Healthy eating promotes weight control, disease prevention, better digestion, immunity, mental clarity, and mood.
                 </p>
               </div>
             </div>
-            <div className="flex flex-col gap-5 md:flex-row md:items-center md:gap-10">
+            <div className="flex flex-col gap-5 md:items-center md:gap-10 md:max-xl:flex-row xl:items-start xl:gap-11">
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-orange-100 md:flex-none">
                 <Image src="/images/gym.svg" alt="" width={32} height={32} aria-hidden="true" />
               </div>
               <div>
-                <h3 className="mb-5 text-1.5xl font-semibold text-blue-800 md:text-2xl">Regular exercise</h3>
+                <h3 className="mb-5 text-1.5xl font-semibold text-blue-800 md:text-2xl xl:mb-6">Regular exercise</h3>
                 <p className="text-gray-500">
                   Exercise improves fitness, aids weight control, elevates mood, and reduces disease risk, fostering wellness and longevity.
                 </p>
               </div>
             </div>
-            <div className="flex flex-col gap-5 md:flex-row md:items-center md:gap-10">
+            <div className="flex flex-col gap-5 md:items-center md:gap-10 md:max-xl:flex-row xl:items-start xl:gap-11">
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-turquoise-100 md:flex-none">
                 <Image src="/images/night.svg" alt="" width={32} height={32} aria-hidden="true" />
               </div>
               <div>
-                <h3 className="mb-5 text-1.5xl font-semibold text-blue-800 md:text-2xl">Adequate sleep</h3>
+                <h3 className="mb-5 text-1.5xl font-semibold text-blue-800 md:text-2xl xl:mb-6">Adequate sleep</h3>
                 <p className="text-gray-500">
                   Sleep enhances mental clarity, emotional stability, and physical wellness, promoting overall restoration and rejuvenation.
                 </p>
