@@ -22,7 +22,7 @@ export default function Home() {
       </section>
 
       <div className="relative bottom-20 md:bottom-28 xl:bottom-auto xl:mt-24">
-        <section className="flex flex-col gap-10 md:mx-auto md:max-w-3xl md:flex-row md:items-center md:justify-between xl:max-w-[74rem] xl:items-end">
+        <section className="flex flex-col gap-10 md:mx-auto md:max-w-3xl md:flex-row md:items-center md:justify-between xl:max-w-6.5xl xl:items-end">
           <div className="relative isolate flex justify-center overflow-hidden rounded-4xl before:absolute before:bottom-0 before:left-0 before:-z-10 before:aspect-video before:max-h-80 before:w-full before:rounded-4xl before:bg-sky-50 md:-left-6 md:w-80 before:md:aspect-[1.2/1] xl:left-auto xl:w-[35rem] before:xl:max-h-96">
             <Image
               src="/images/person-eating.png"
@@ -89,17 +89,27 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="mt-14 px-5 md:mx-auto md:mt-20 md:max-w-3xl md:px-10">
-          <div className="mb-14 md:mx-auto md:mb-17 md:max-w-[40rem]">
-            <h2 className="mb-7 text-center text-3xl font-semibold text-blue-800 md:mb-6">Limitations of BMI</h2>
-            <p className="text-center text-gray-500">
+        <section className="mt-14 px-5 md:mx-auto md:mt-20 md:max-w-3xl md:px-10 xl:mt-33 xl:max-w-6.5xl xl:px-0">
+          <div className="text-center md:max-w-[40rem] md:max-xl:mx-auto xl:relative xl:max-w-lg xl:text-start">
+            <h2 className="text-3xl font-semibold text-blue-800 md:mb-6 xl:text-5xl">Limitations of BMI</h2>
+            <p className="text-gray-500">
               Although BMI is often a practical indicator of healthy weight, it is not suited for every person. Specific groups should carefully consider their
               BMI outcomes, and in certain cases, the isMetric may not be beneficial to use.
             </p>
+            <Desktop>
+              <Image
+                src="/images/desktop-left-arc.svg"
+                alt=""
+                width={93}
+                height={123}
+                aria-hidden="true"
+                className="absolute -bottom-[calc(100%+4rem)] left-52"
+              />
+            </Desktop>
           </div>
-          <div className="grid gap-4 md:grid-cols-4">
-            <div className="rounded-2.5xl p-5 shadow-card md:col-span-2 md:p-8">
-              <div className="mb-4 flex items-center gap-3.5 md:gap-4">
+          <div className="mt-7 grid gap-4 md:mt-17 md:grid-cols-4 xl:relative xl:bottom-28 xl:ml-auto xl:mt-0 xl:max-w-[59rem] xl:grid-cols-10 xl:grid-rows-[repeat(3,auto)] xl:gap-7">
+            <div className="rounded-2.5xl p-5 shadow-card md:col-span-2 md:p-8 xl:col-span-4 xl:col-start-6">
+              <div className="mb-4 flex items-center gap-3.5 md:gap-4 xl:gap-5">
                 <Image src="/images/gender.svg" alt="" width={32} height={32} aria-hidden="true" />
                 <h3 className="text-lg font-semibold text-blue-800 md:text-xl">Gender</h3>
               </div>
@@ -108,15 +118,15 @@ export default function Home() {
                 evaluating their BMI.
               </p>
             </div>
-            <div className="rounded-2.5xl p-5 shadow-card md:col-span-2 md:p-8">
-              <div className="mb-4 flex items-center gap-3.5 md:gap-4">
+            <div className="rounded-2.5xl p-5 shadow-card md:col-span-2 md:p-8 xl:col-span-4 xl:col-start-3 xl:row-start-2">
+              <div className="mb-4 flex items-center gap-3.5 md:gap-4 xl:gap-5">
                 <Image src="/images/cake.svg" alt="" width={32} height={32} aria-hidden="true" />
                 <h3 className="text-lg font-semibold text-blue-800 md:text-xl">Age</h3>
               </div>
               <p className="text-gray-500">In aging individuals, increased body fat and muscle loss may cause BMI to underestimate body fat content.</p>
             </div>
-            <div className="rounded-2.5xl p-5 shadow-card md:col-span-2 md:p-8">
-              <div className="mb-4 flex items-center gap-3.5 md:gap-4">
+            <div className="rounded-2.5xl p-5 shadow-card md:col-span-2 md:p-8 xl:col-span-4 xl:col-start-7 xl:row-start-2">
+              <div className="mb-4 flex items-center gap-3.5 md:gap-4 xl:gap-5">
                 <Image src="/images/muscle.svg" alt="" width={32} height={32} aria-hidden="true" />
                 <h3 className="text-lg font-semibold text-blue-800 md:text-xl">Muscle</h3>
               </div>
@@ -124,8 +134,8 @@ export default function Home() {
                 BMI may misclassify muscular individuals as overweight or obese, as it doesn&#x2019;t differentiate muscle from fat.
               </p>
             </div>
-            <div className="rounded-2.5xl p-5 shadow-card md:col-span-2 md:p-8">
-              <div className="mb-4 flex items-center gap-3.5 md:gap-4">
+            <div className="rounded-2.5xl p-5 shadow-card md:col-span-2 md:p-8 xl:col-span-4 xl:col-start-1 xl:row-start-3">
+              <div className="mb-4 flex items-center gap-3.5 md:gap-4 xl:gap-5">
                 <Image src="/images/baby.svg" alt="" width={32} height={32} aria-hidden="true" />
                 <h3 className="text-lg font-semibold text-blue-800 md:text-xl">Pregnancy</h3>
               </div>
@@ -134,8 +144,8 @@ export default function Home() {
                 risks for both mother and child.
               </p>
             </div>
-            <div className="rounded-2.5xl p-5 shadow-card md:col-start-2 md:col-end-4 md:p-8">
-              <div className="mb-4 flex items-center gap-3.5 md:gap-4">
+            <div className="rounded-2.5xl p-5 shadow-card md:col-start-2 md:col-end-4 md:p-8 xl:col-span-4 xl:col-start-5 xl:row-start-3">
+              <div className="mb-4 flex items-center gap-3.5 md:gap-4 xl:gap-5">
                 <Image src="/images/person.svg" alt="" width={32} height={32} aria-hidden="true" />
                 <h3 className="text-lg font-semibold text-blue-800 md:text-xl">Race</h3>
               </div>
