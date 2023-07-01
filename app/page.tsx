@@ -1,6 +1,8 @@
 import Image from 'next/image';
-import Card from './card';
-import { Desktop } from './desktop';
+import Card from '../components/card';
+import dynamic from 'next/dynamic';
+
+const Desktop = dynamic(() => import('../components/desktop'), { ssr: false });
 
 export default function Home() {
   return (
@@ -41,7 +43,7 @@ export default function Home() {
                 width={85}
                 height={201}
                 aria-hidden="true"
-                className="absolute -top-[calc(100%-4rem)] right-0"
+                className="absolute -top-[calc(100%-4rem)] right-3"
               />
             </Desktop>
             <h2 className="mb-6 text-3xl font-semibold text-blue-800 xl:text-4.5xl">What your BMI result means</h2>

@@ -1,7 +1,7 @@
 'use client';
 import { ReactNode, useEffect, useState } from 'react';
 
-export function Desktop({ children }: { children: ReactNode }) {
+export default function Desktop({ children }: { children: ReactNode }) {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1280);
 
   useEffect(() => {

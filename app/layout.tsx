@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: 'Body Mass Index Calculator',
-  description: "Calculate your body mass index, it's fast and easy",
+  title: 'BMI Calculator',
+  description: 'Calculate your body mass index (BMI) in a fast and easy way.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

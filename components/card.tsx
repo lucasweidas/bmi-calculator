@@ -14,7 +14,7 @@ export default function Card() {
   }
 
   return (
-    <div className="relative bottom-44 z-50 flex w-card-lg flex-col gap-6 rounded-2.5xl bg-white p-6 shadow-card md:bottom-64 md:gap-8 md:p-8 xl:absolute xl:bottom-auto xl:left-[38rem] xl:top-32 xl:w-card-md">
+    <div className="relative bottom-44 z-50 flex w-card-lg flex-col gap-6 rounded-2.5xl bg-white p-6 shadow-card md:bottom-64 md:gap-8 md:p-8 xl:absolute xl:bottom-auto xl:left-[38rem] xl:top-32 xl:w-card-md desktop:left-[44rem]">
       <h2 className="text-xl font-semibold text-blue-900 md:text-2xl">Enter your details below</h2>
       <div className="flex flex-wrap justify-between gap-4 md:gap-6">
         <RadioInput id="metric" name="measurement" checked={isMetric} onChange={handleMeasurementChange} defaultChecked={true}>
