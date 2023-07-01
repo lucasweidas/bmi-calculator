@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Card from './card';
+import { Desktop } from './desktop';
 
 export default function Home() {
   return (
@@ -32,7 +33,17 @@ export default function Home() {
               priority
             />
           </div>
-          <div className="px-5 md:mr-10 md:max-w-[21rem] md:px-0 xl:mr-0 xl:max-w-[29rem] xl:pb-12">
+          <div className="px-5 md:mr-10 md:max-w-[21rem] md:px-0 xl:relative xl:mr-0 xl:max-w-[29rem] xl:pb-12">
+            <Desktop>
+              <Image
+                src="/images/desktop-right-arc.svg"
+                alt=""
+                width={85}
+                height={201}
+                aria-hidden="true"
+                className="absolute -top-[calc(100%-4rem)] right-0"
+              />
+            </Desktop>
             <h2 className="mb-6 text-3xl font-semibold text-blue-800 xl:text-4.5xl">What your BMI result means</h2>
             <p className="text-gray-500">
               A BMI range of 18.5 to 24.9 is considered a &#x2018;healthy weight&#x2019;. Maintaining a healthy weight may lower your changes of experiencing
