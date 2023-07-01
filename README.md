@@ -26,10 +26,10 @@ Thanks for checking out this project.
 
 ### Built with
 
-TypeScript
-React
-NextJS
-TailwindCSS
+- TypeScript
+- React
+- NextJS
+- TailwindCSS
 
 ## Author
 
